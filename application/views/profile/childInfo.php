@@ -1,12 +1,12 @@
-<div id="childInfoDisplay" > 
+<div id="childInfoDisplay" >
     <h2>Child details</h2>
-    
+
 <?php //var_dump($studentData); ?>
-    
+
     <?php if($parent) : ?>
     <?php foreach($studentData as $student): ?>
         <?php //var_dump($student); ?>
-        <? echo form_open('user/profile/studentUpdate/',array('id' => 'parentForm')); ?> 
+        <?php echo form_open('user/profile/studentUpdate/',array('id' => 'parentForm')); ?>
             <div class="h_title" id="student<?php echo $student['id']; ?>"><?php echo $student['name']; ?> <span id="expand<?php echo $student['id']; ?>">[+]</span></div>
             <div class="element data" id="ele<?php echo $student['id']; ?>" style="display: none;">
                 <input type="hidden" name="studentId" value="<?php echo $student['id']; ?>" />
@@ -14,19 +14,19 @@
                 <div class="element">
                     <label for="name<?php echo $student['id']; ?>">First name<span class="red"> *</span><span id="nameval<?php echo $student['id']; ?>" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></label>
                     <input id="name<?php echo $student['id']; ?>" name="name" class="text err" value="<?php echo $student['name']; ?>" />
-                
+
                     <br />
                     <br />
                     <label for="age<?php echo $student['id']; ?>">Date of birth<span class="red"> *</span><span id="ageval<?php echo $student['id']; ?>" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></label>
                     <input id="age<?php echo $student['id']; ?>" name="age" class="text err" value="<?php echo $student['dob']; ?>" />
-                </div>  
-                
-                         
+                </div>
+
+
             <div class="element">
                 <h3>School<span class="red"> *</span> <span id="typeval<?php echo $student['id']; ?>" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></h3>
                 <br />
                 <ul style="list-style: none;">
-                
+
                     <?php
                         foreach($schools as $school)
                         {
@@ -39,15 +39,15 @@
                             echo '</li>';
                         }
                     ?>
-                    
+
                     <li>
                         <label for="otherText<?php echo $student['id']; ?>" >
-                            Other: <input style="width: 150px;"  id="otherText" name="otherText" value="<?php echo $student['schoolOther']; ?>"/> 
+                            Other: <input style="width: 150px;"  id="otherText" name="otherText" value="<?php echo $student['schoolOther']; ?>"/>
                         </label>
-                    </li>        
-                </ul>      
-            </div> 
-            
+                    </li>
+                </ul>
+            </div>
+
             <div class="element">
                 <h3>Days at school?<span class="red"> *</span><span id="daysval<?php echo $student['id']; ?>" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span> </h3>
                 <table style="width: 50%; text-align: center;">
@@ -55,18 +55,18 @@
                         <?php for($cnt = 1; $cnt <= 5; $cnt++) echo '<td>'.$cnt.'</td>'; ?>
                     </tr>
                     <tr>
-                        <?php 
-                            for($cnt = 1; $cnt <= 5; $cnt++) 
+                        <?php
+                            for($cnt = 1; $cnt <= 5; $cnt++)
                             {
-                               $check = ($cnt == $student['daysAtSchool']) ? 'checked="checked"': ''; 
+                               $check = ($cnt == $student['daysAtSchool']) ? 'checked="checked"': '';
                                echo '<td><input type="radio" name="days" value="'.$cnt.'" '.$check.'/></td>';
                             }
-                        ?> 
+                        ?>
                     </tr>
-                </table>    
-            </div>  
-            
-            
+                </table>
+            </div>
+
+
             <div class="element">
                 <h3>Child conditions?<span class="red"> *</span><span id="conval<?php echo $student['id']; ?>" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span> </h3>
                 <br />
@@ -82,15 +82,15 @@
                             echo '</label>';
                             echo '</li>';
                         }
-                    ?> 
+                    ?>
                     <li>
                         <label for="otherConditionText<?php echo $student['id']; ?>" >
-                            Other: <input style="width: 150px;"  id="otherConditionText" name="otherConditionText" value="<?php echo $student['conditionOther']; ?>"/> 
+                            Other: <input style="width: 150px;"  id="otherConditionText" name="otherConditionText" value="<?php echo $student['conditionOther']; ?>"/>
                         </label>
-                    </li>        
+                    </li>
                 </ul>
-            </div>         
-            
+            </div>
+
             <div class="element">
                 <h3>What is you child's level of experience with the following technologies?<span class="red"> *</span><span id="expval<?php echo $student['id'];?>" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span>  </h3>
                 <table style="text-align: center; width: 75%;">
@@ -100,26 +100,26 @@
                         <td>Medium</td>
                         <td>High</td>
                     </tr>
-                    
-                    <?php           
+
+                    <?php
                         foreach($techs as $tech)
                         {
                             echo '<tr>';
                             echo '<td>'.$tech['desc'].'</td>';
-                            
+
                             for($cnt2 = 0; $cnt2 < 3; $cnt2++)
                             {
                                 if(isset($student['studentExp'][$tech['id']]))
-                                    $check = ($student['studentExp'][$tech['id']] == ($cnt2 + 1)) ? 'checked="checked"': ''; 
+                                    $check = ($student['studentExp'][$tech['id']] == ($cnt2 + 1)) ? 'checked="checked"': '';
                                 echo '<td><input type="radio" name="exp'.$tech['id'].'" value="'. ($cnt2 + 1) .'" '.$check.' /></td>';
                             }
-                            
-                            echo '</tr>';                    
-                        }            
+
+                            echo '</tr>';
+                        }
                     ?>
                 </table>
-            </div>  
-              
+            </div>
+
             <div class="element">
                 <h3>What is you child's level of interest in the following technologies?<span class="red"> *</span><span id="intrestval<?php echo $student['id'];?>" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></h3>
                 <table style="text-align: center; width: 75%;">
@@ -129,28 +129,28 @@
                         <td>Medium</td>
                         <td>High</td>
                     </tr>
-                    
+
                     <?php
-        
+
                         foreach($techs as $tech)
                         {
                             echo '<tr>';
                             echo '<td>'.$tech['desc'].'</td>';
-                            
+
                             for($cnt2 = 0; $cnt2 < 3; $cnt2++)
                             {
                                 if(isset($student['studentInterest'][$tech['id']]))
-                                    $check = ($student['studentInterest'][$tech['id']] == ($cnt2 + 1)) ? 'checked="checked"': ''; 
+                                    $check = ($student['studentInterest'][$tech['id']] == ($cnt2 + 1)) ? 'checked="checked"': '';
                                 echo '<td><input type="radio" name="intrest'.$tech['id'].'" value="'. ($cnt2 + 1) .'" '.$check.' /></td>';
                             }
-                                
-                            
-                            echo '</tr>';                    
-                        }             
+
+
+                            echo '</tr>';
+                        }
                     ?>
                 </table>
-            </div>            
-            
+            </div>
+
             <div class="element">
                 <h3>Is your child more interested in learning programming and design,<br /> or making friends and undertaking social activities (such as multi-user games)?<span class="red"> *</span><span id="inval" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span> </h3>
                 <p><i>We will be holding separate sessions for those wanting to be social, and those wanting to learn skills - answers should reflect how a young person spends their own spare time on the computer</i></p>
@@ -159,10 +159,10 @@
                     <?php
                         //$names = array('autisim1','hfa1','as1','adhd','anxiety','no');
                         $text = array('Social activities','Learning programming and design skills','Both');
-                        
+
                         for($cnt = 0; $cnt < sizeof($text); $cnt++)
                         {
-                            $check = ($student['sessionType'] == ($cnt + 1)) ? 'checked="checked"': ''; 
+                            $check = ($student['sessionType'] == ($cnt + 1)) ? 'checked="checked"': '';
                             echo '<li>';
                             echo '<label for="interested',$student['id'].'" >';
                             echo '<input type="radio" name="socialInterest" value="'.($cnt + 1).'" '.$check.' />&nbsp;'.$text[$cnt];
@@ -172,10 +172,10 @@
                     ?>
                     <li>
                         <label for="interested<?php echo $student['id'];?>" >
-                            <input type="radio" name="interested<?php echo $student['id'];?>" value="4"  />&nbsp;Other: <input style="width: 150px;"  id="otherintrestText<?php echo $student['id'];?>" name="otherintrestText"/> 
+                            <input type="radio" name="interested<?php echo $student['id'];?>" value="4"  />&nbsp;Other: <input style="width: 150px;"  id="otherintrestText<?php echo $student['id'];?>" name="otherintrestText"/>
                         </label>
-                    </li>  
-                </ul>        
+                    </li>
+                </ul>
             </div>
 
             <div class="element">
@@ -190,10 +190,10 @@
                     </li>
                     <li>
                         <label for="pc" >
-                            <input type="radio" name="pc" value="2" <?php echo ($student['lapTop'] == '0') ? 'checked="checked"': ''; ?>  />&nbsp;No 
+                            <input type="radio" name="pc" value="2" <?php echo ($student['lapTop'] == '0') ? 'checked="checked"': ''; ?>  />&nbsp;No
                         </label>
-                    </li>  
-                </ul> 
+                    </li>
+                </ul>
             </div>
 
             <div class="element">
@@ -206,38 +206,38 @@
     		<div class="entry" style="height: 29px;">
     			<button   type="submit" style="float: right;" id="submit<?php echo $student['id'];?>" >Update</button>
     		</div>
-           
-           
-            </div>
-            
-            
-        </form>
-        
 
-        
+
+            </div>
+
+
+        </form>
+
+
+
         <script>
-        
+
             $('#student<?php echo $student['id']; ?>').click(function()
             {
                 studentInfoShow('<?php echo $student['id']; ?>');
             });
-            
+
             $( "#age" + <?php echo $student['id']; ?> ).datepicker({ dateFormat: "dd/mm/yy", maxDate: "-1y" });
-            
+
             $('#submit<?php echo $student['id'];?>').click(function(e)
             {
                  return true;
             });
-            
+
         </script>
-        
+
     <?php endforeach; ?>
-    
+
     <?php endif; ?>
-    
+
     <?php if(!$parent): ?>
         <h3>No child information found</h3>
-    
+
     <?php endif; ?>
 
 </div>
@@ -247,7 +247,7 @@
         $('#childInfoDisplay').hide('fast');
         return false;
     }
-    
+
     function studentInfoShow(id)
     {
         $('.data').each(function()
@@ -272,13 +272,13 @@
                         $("html, body").animate({ scrollTop: $(this).offset().top - 100 }, "slow");
                     });
                     $('#expand'+id).html('[-]');
-                    
+
                 }
             }
         });
-        
-        
-        
-        
+
+
+
+
     }
 </script>

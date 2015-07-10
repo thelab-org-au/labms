@@ -1,5 +1,5 @@
 <?php //var_dump($info[0]); ?>
-<? echo form_open('admin/amentors/removeMentor/',array('id' => 'removeMentor')); ?>  
+<?php echo form_open('admin/amentors/removeMentor/',array('id' => 'removeMentor')); ?>
     <table style="text-align: center; width: 160px;">
         <thead>
             <tr>
@@ -16,10 +16,10 @@
                     echo '<td>'.$locations[$l['location']].'</td>';
                     echo '</tr>';
                 }
-            
+
             ?>
         </tbody>
-    
+
     </table>
     <input type="hidden" name="mentorId" value="<?php echo $info[0]['id']; ?> " />
     <button >Submit</button>

@@ -1,16 +1,16 @@
 <div class="full_w" >
 	<div class="h_title"><?php echo $title;?></div>
     <?php $this->load->view('display'); ?>
-    
-    
+
+
     <?php //var_dump($locations); ?>
     <div  id="addLocation">
     <h3>Add new location</h3>
-    
-        <? echo form_open('admin/alocations/add/',array('id' => 'locationForm')); ?>
-        
+
+        <?php echo form_open('admin/alocations/add/',array('id' => 'locationForm')); ?>
+
         <p id="addError" style="display: none; color: red;"></p>
-         
+
         <table>
             <thead>
                 <tr>
@@ -27,22 +27,22 @@
         </table>
         </form>
     </div>
-    
+
     <div id="editLocation" style="display: none;">
         <h3>Edit location</h3>
         <div id="editData" >
             <?php //$this->load->view('admin/locationsEdit'); ?>
-        </div>    
+        </div>
     </div>
     <br />
-    <br />    
+    <br />
     <?php $this->load->view('admin/locationsTable'); ?>
-     
+
 </div>
 
 <script type="text/javascript">
     $('#addLocationButton').click(function(){
-        
+
         if(valLocation())
         {
             $('#addError').hide();
@@ -55,15 +55,15 @@
             return false;
         }
     })
-    
+
     function valLocation()
     {
         if($('#addName').val() == '')
             return false;
-        
+
         if($('#addAddress').val() == '')
             return false;
         return true;
     }
-    
+
 </script>

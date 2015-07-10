@@ -1,7 +1,7 @@
 <div class="full_w" >
 
 	<div class="h_title">Session cost</div>
-    
+
 
 
     <?php $this->load->view('display'); ?>
@@ -10,20 +10,20 @@
 
 
 
-    <? echo form_open('admin/cost/addCost',array('id' => 'createsessionform')); ?> 
+    <?php echo form_open('admin/cost/addCost',array('id' => 'createsessionform')); ?>
     <label for="location">Location</label>
     <select name="location" class="err" id="location">
-    
+
         <option value="-1">Select location</option>
-    
+
         <?php foreach($locations as $location): ?>
-    
+
             <option value="<?php echo $location['id'];?>"><?php echo $location['name'];?></option>
-    
+
         <?php endforeach;?>
-    
+
     </select>
-    
+
     <div id="sessionInfo"></div>
     <!--
         <table style="width: 75%;">
@@ -72,7 +72,7 @@
 
                             <?php foreach($terms as $term): ?>
 
-                                <option value="<?php echo $term['id'];?>"><?php echo $term['desc'];?></option>                              
+                                <option value="<?php echo $term['id'];?>"><?php echo $term['desc'];?></option>
 
                             <?php endforeach;?>
 
@@ -88,7 +88,7 @@
 
                             <?php foreach($sessions as $session): ?>
 
-                                <option value="<?php echo $session['id'];?>"><?php echo $session['desc'];?></option>                              
+                                <option value="<?php echo $session['id'];?>"><?php echo $session['desc'];?></option>
 
                             <?php endforeach;?>
 
@@ -102,7 +102,7 @@
 
             </tbody>
 
-        
+
 
         </table>
 
@@ -146,7 +146,7 @@
 
         </table>
 
-    
+
 -->
     </form>
 
@@ -190,11 +190,11 @@
 
     });
 
-    
+
     $('#location').change(function()
     {
         ajax = new Ajax();
-        ajax.doReq('<?php echo site_url(); ?>/admin/cost/getLocationData?location=' + $('#location').val(),setCallback,$('#sessionInfo'));   
+        ajax.doReq('<?php echo site_url(); ?>/admin/cost/getLocationData?location=' + $('#location').val(),setCallback,$('#sessionInfo'));
     });
 
 

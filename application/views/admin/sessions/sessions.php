@@ -1,18 +1,18 @@
 <div class="full_w" >
 	<div class="h_title">Sessions</div>
     <?php $this->load->view('display'); ?>
-    
+
     <form>
         <button class="add" id="addSessionTime">Add session time</button>
         <button class="add" id="addTermDate">Add term dates</button>
         <button class="add" id="addLocationSession">Add location session</button>
     </form>
-    
-    
+
+
     <div id="addSessionDisplay" style="display: none;">
     <h3>Add session time</h3>
-    
-        <? echo form_open('admin/asessions/addsession/',array('id' => 'addsessionform')); ?> 
+
+        <?php echo form_open('admin/asessions/addsession/',array('id' => 'addsessionform')); ?>
             <table style="width: 75%;">
                 <thead>
                     <tr>
@@ -28,10 +28,10 @@
                             <select name="day" class="err" id="day">
                                 <option value="-1">Select day</option>
                                 <?php foreach($days as $day): ?>
-                                    <option value="<?php echo $day;?>"><?php echo $day;?></option>                              
+                                    <option value="<?php echo $day;?>"><?php echo $day;?></option>
                                 <?php endforeach;?>
                             </select>
-                        
+
                         </td>
                         <td ><input name="start" value="" id="start" /></td>
                         <td ><input name="end" value="" id="end" /></td>
@@ -40,9 +40,9 @@
                 </tbody>
             </table>
         </form>
-        
-        <h3>Existing session times</h3>    
-        
+
+        <h3>Existing session times</h3>
+
         <form>
             <table style="width: 75%;">
                 <thead>
@@ -63,12 +63,12 @@
                 </tbody>
             </table>
         </form>
-    </div>    
-    
-    <div id="addTermDisplay" style="display: none;">   
-    <h3>Add term dates</h3> 
-    
-        <? echo form_open('admin/asessions/addTerm/',array('id' => 'addTermform')); ?> 
+    </div>
+
+    <div id="addTermDisplay" style="display: none;">
+    <h3>Add term dates</h3>
+
+        <?php echo form_open('admin/asessions/addTerm/',array('id' => 'addTermform')); ?>
             <table style="width: 75%;">
                 <thead>
                     <tr>
@@ -84,11 +84,11 @@
                         <td><button class="add" id="addTermSubmit">Add</button></td>
                     </tr>
                 </tbody>
-            </table>        
-        </form>  
-        
-         <h3>Existing term dates</h3>    
-        
+            </table>
+        </form>
+
+         <h3>Existing term dates</h3>
+
         <form>
             <table style="width: 75%;">
                 <thead>
@@ -107,13 +107,13 @@
                 </tbody>
             </table>
         </form>
-        
-     </div>    
-    
-    <div id="addTermSessionDisplay" style="display: none;">   
-    <h3>Add location session</h3> 
-    
-    <? echo form_open('admin/asessions/create/',array('id' => 'createsessionform')); ?> 
+
+     </div>
+
+    <div id="addTermSessionDisplay" style="display: none;">
+    <h3>Add location session</h3>
+
+    <?php echo form_open('admin/asessions/create/',array('id' => 'createsessionform')); ?>
         <table style="width: 75%;">
             <thead>
                 <tr>
@@ -129,7 +129,7 @@
                         <select name="location" class="err" id="location">
                             <option value="-1">Select location</option>
                             <?php foreach($locations as $location): ?>
-                                <option value="<?php echo $location['id'];?>"><?php echo $location['desc'];?></option>                              
+                                <option value="<?php echo $location['id'];?>"><?php echo $location['desc'];?></option>
                             <?php endforeach;?>
                         </select>
                     </td>
@@ -137,7 +137,7 @@
                         <select name="term" class="err" id="term">
                             <option value="-1">Select term</option>
                             <?php foreach($terms as $term): ?>
-                                <option value="<?php echo $term['id'];?>"><?php echo $term['desc'];?></option>                              
+                                <option value="<?php echo $term['id'];?>"><?php echo $term['desc'];?></option>
                             <?php endforeach;?>
                         </select>
                     </td>
@@ -145,21 +145,21 @@
                         <select name="session" class="err" id="session">
                             <option value="-1">Select session</option>
                             <?php foreach($sessions as $session): ?>
-                                <option value="<?php echo $session['id'];?>"><?php echo $session['desc'];?></option>                              
+                                <option value="<?php echo $session['id'];?>"><?php echo $session['desc'];?></option>
                             <?php endforeach;?>
                         </select>
                     </td>
                     <td><button class="add">Add</button></td>
                 </tr>
             </tbody>
-        
+
         </table>
-    
+
     </form>
-    </div> 
-    
+    </div>
+
     <form><button id="closeDisplay" style="display: none;">Close</button></form>
-    
+
     <div >
         <h3>Location sessions</h3>
         <table style="width: 96.5%;">
@@ -207,14 +207,14 @@
                         $second = date_create_from_format('d/m/Y', $date2);
                         return ($first < $second);
                     }
-                
+
                 ?>
             </tbody>
-        
+
         </table>
-    
+
     </div>
-    
+
 </div>
 
 
@@ -226,8 +226,8 @@
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><span id="confirmMessage"></span></span></p>
 </div>
 
-<link href="<?php echo base_url(); ?>/css/jquery.ptTimeSelect.css" rel="stylesheet" type="text/css" /> 
-<script type="text/javascript" src="<?php echo base_url(); ?>/js/jquery.ptTimeSelect.js"></script> 
+<link href="<?php echo base_url(); ?>/css/jquery.ptTimeSelect.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo base_url(); ?>/js/jquery.ptTimeSelect.js"></script>
 <script type="text/javascript">
 
 
@@ -246,36 +246,36 @@
         }
       }
     });
-    
+
     $(document).ready(function()
     {
         $('#start').timePicker({show24Hours: false,'step': 15 });
         $('#end').timePicker({show24Hours: false, 'step': 15 });
-        
+
         var today = new Date();
         var tomorrow = new Date();
         tomorrow.setDate(today.getDate()+(7 * 3));
         $( "#startDate" ).datepicker({ dateFormat: "dd/mm/yy" });
         $( "#endDate" ).datepicker({ dateFormat: "dd/mm/yy" });
     });
-    
-    
-    
+
+
+
     $('#addSession').click(function(event)
     {
         event.preventDefault();
-        
+
         if(!valMessage($('#day'),'-1','Please select the day'))
             return;
-        
+
         if(!valMessage($('#start'),'','Please select start time'))
             return;
 
         if(!valMessage($('#end'),'','Please select end time'))
             return;
-            
+
         $('#confirmMessage').html('Add session data </br></br>' + $('#day').val() + ' ' + $('#start').val() + ' ' + $('#end').val());
-         
+
         $( "#dialog-confirm" ).clone().dialog(
         {
               resizable: false,
@@ -283,37 +283,37 @@
               modal: true,
               buttons:
               {
-                    "Add sesion": function() 
+                    "Add sesion": function()
                     {
                         $( this ).dialog( "close" );
                         $('#addsessionform').submit();
                     },
-                    Cancel: function() 
+                    Cancel: function()
                     {
                         $( this ).dialog( "close" );
-                    }                
-              }             
-        });  
+                    }
+              }
+        });
     });
 
-                
-        
-    
-    
-    
-    
+
+
+
+
+
+
     $('#addTermSubmit').click(function(event)
     {
-        event.preventDefault(); 
+        event.preventDefault();
 
         if(!valMessage($('#startDate'),'','Please select start date'))
             return;
 
         if(!valMessage($('#endDate'),'','Please select end date'))
-            return; 
-            
+            return;
+
          $('#confirmMessage').html('Add term data </br></br>'  + $('#startDate').val() + ' ' + $('#endDate').val());
-         
+
         $( "#dialog-confirm" ).clone().dialog(
         {
               resizable: false,
@@ -321,20 +321,20 @@
               modal: true,
               buttons:
               {
-                    "Add term": function() 
+                    "Add term": function()
                     {
                         $( this ).dialog( "close" );
                         $('#addTermform').submit();
                     },
-                    Cancel: function() 
+                    Cancel: function()
                     {
                         $( this ).dialog( "close" );
-                    }                
-              }            
-        });        
+                    }
+              }
+        });
     });
 
-    
+
     function valMessage(object,val,message)
     {
         if(object.val() == val)
@@ -343,47 +343,47 @@
             $( "#dialog-message-sessions" ).dialog( "open" );
             return false;
         }
-        
-        return true;        
+
+        return true;
     };
-    
+
     $('#addSessionTime').click(function(event)
     {
-       event.preventDefault(); 
+       event.preventDefault();
        $('#addSessionDisplay').show();
        $('#closeDisplay').show();
        $('#addTermDisplay').hide();
        $('#addTermSessionDisplay').hide();
     });
-    
+
     $('#addTermDate').click(function(event)
     {
-       event.preventDefault(); 
+       event.preventDefault();
        $('#addTermDisplay').show();
        $('#closeDisplay').show();
        $('#addSessionDisplay').hide();
        $('#addTermSessionDisplay').hide();
     });
-    
+
     $('#addLocationSession').click(function(event)
     {
-       event.preventDefault(); 
+       event.preventDefault();
        $('#addTermSessionDisplay').show();
        $('#closeDisplay').show();
        $('#addTermDisplay').hide();
        $('#addSessionDisplay').hide();
     });
-    
+
     $('#closeDisplay').click(function(event)
     {
         event.preventDefault();
        $('#addTermSessionDisplay').hide();
        $('#addTermDisplay').hide();
-       $('#addSessionDisplay').hide(); 
-       $('#closeDisplay').hide(); 
+       $('#addSessionDisplay').hide();
+       $('#closeDisplay').hide();
     });
-    
-    
+
+
 </script>
 
 

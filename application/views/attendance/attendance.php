@@ -1,9 +1,9 @@
 <div class="full_w" style="min-height: 500px;">
 	<div class="h_title">Attendance</div>
-    
+
     <div id="attendanceRecords">
         <?php $this->load->view('display'); ?>
-            <?php // echo form_open('signup/waitlist/signup/',array('id' => 'parentForm')); ?> 
+            <?php // echo form_open('signup/waitlist/signup/',array('id' => 'parentForm')); ?>
             <form>
             <?php
                 if(isset($sessionInfo))
@@ -11,26 +11,26 @@
                     echo '<input type="hidden" id="sessId" name="sessId" value="'.$sessionInfo[0]['id'].'" />';
                 }
             ?>
-            
-            
+
+
             <div class="element">
         		<select name="lab" class="err" id="lab" onchange="labChange()">
         			<option value="-1">-Select Lab-</option>
-                    
-                    <?php 
+
+                    <?php
                         foreach($labInfo as $lab)
-                            echo '<option value="'.$lab['id'].'"'.( isset($sessionInfo) && ($lab['id'] == $sessionInfo[0]['location']) ? 'selected="selected"' : '' ) .'>'.$lab['name'].'</option>'; 
-                           
+                            echo '<option value="'.$lab['id'].'"'.( isset($sessionInfo) && ($lab['id'] == $sessionInfo[0]['location']) ? 'selected="selected"' : '' ) .'>'.$lab['name'].'</option>';
+
                     ?>
-                    
+
         		</select>
-                    
-                    <input type="hidden" name="labCount" id="labCount" value="<?php echo sizeof($labInfo); ?>" /> 
-                 
-                 <span id="sessionSelect"> 
-                 
+
+                    <input type="hidden" name="labCount" id="labCount" value="<?php echo sizeof($labInfo); ?>" />
+
+                 <span id="sessionSelect">
+
                     <?php if(isset($selectedSession)) echo $selectedSession;?>
-                    </span> 
+                    </span>
           </form>
                 <?php
                     /*
@@ -45,7 +45,7 @@
 								{
 									if($session['id'] == $sessionInfo[0]['id'])
 										$display = true;
-								
+
 								}
 							}
 
@@ -54,64 +54,64 @@
                             else
                                 echo  '&nbsp;<select style="display:none;" name="lab'.$lab['id'].'" class="err" id="lab'.$lab['id'].'" onchange="getStudentData()">';
                            echo '<option value="-1">-Select Session-</option>';
-                           
+
                                 foreach($lab['sessions'] as $session)
                                     echo '<option value="'.$session['id'].'"'.(isset($sessionInfo) && ($session['id'] == $sessionInfo[0]['id']) ? 'selected="selected"' : '' ) .'>'.$session['desc'].'</option>';
-                                                        
-                           echo '</select>';                    
+
+                           echo '</select>';
                         }
                     }*/
-                ?> 
-                 
+                ?>
+
             </div>
        <!-- </form> -->
-        
-        <? echo form_open('attendance/process',array('id' => 'parentForm')); ?> 
-        
+
+        <?php echo form_open('attendance/process',array('id' => 'parentForm')); ?>
+
             <div id="attRecords">
 
             </div>
-            
+
             <div id="attDeRecords">
 
             </div>
-            
+
     		<div class="entry" style="height: 29px;">
-                <button type="submit" class="add" id="addChild" style="display: none;" onclick=" return false;">Add student</button> 
+                <button type="submit" class="add" id="addChild" style="display: none;" onclick=" return false;">Add student</button>
     			<button type="submit" style="float: right; display: none;" id="addAttendance" >Submit</button>
     		</div>
         </form>
 
     </div>
-    
+
     <div id="addStudent" style="display: none;">
         <h3>Add student</h3>
-        
+
         <div class="element">
             <form>
                 <label for="labadd">Search by location</label>
                 <select name="labadd" class="err" id="labAdd" onchange="searchByLab()" >
                     <option value="-1">-Select Lab-</option>
-                    
-                    <?php 
+
+                    <?php
                         foreach($labInfo as $lab)
-                            echo '<option value="'.$lab['id'].'"'.( isset($sessionInfo) && ($lab['id'] == $sessionInfo[0]['location']) ? 'selected="selected"' : '' ) .'>'.$lab['name'].'</option>'; 
-                           
+                            echo '<option value="'.$lab['id'].'"'.( isset($sessionInfo) && ($lab['id'] == $sessionInfo[0]['location']) ? 'selected="selected"' : '' ) .'>'.$lab['name'].'</option>';
+
                     ?>
-                
+
                 </select>
             </form>
         </div>
-        
+
         <div class="element">
             <form>
                 <label for="labadd">Add new student</label>
                 <button type="submit" id="newStudent" onclick=" return false;">New student</button>
-           </form>     
+           </form>
         </div>
-        
+
         <div class="element">
-        
+
             <form>
                 <label for="searchField">Search by name</label>
                 <p>Leave blank to view all students</p>
@@ -122,20 +122,20 @@
                 <br />
                 <button type="submit" id="close" onclick=" return false;">Close</button>
             </form>
-        </div> 
-        
+        </div>
 
-        
+
+
         <div class="element">
             <div id="searchResults">
             </div>
-        </div> 
-         
-    </div>  
-    
+        </div>
+
+    </div>
+
     <div id="newStudentForm" style="display: none;">
         <?php $this->load->view('student/add'); ?>
-    </div> 
+    </div>
 </div>
 
 
@@ -161,7 +161,7 @@
         }
       }
     });
-	
+
 	$('#addAttendance').click(function(event){
 		if($('#attendanceBody tr').length == 0)
         {
@@ -169,7 +169,7 @@
             $('#dialogMessage').html('Please add students to the session');
             $( "#dialog-message"  ).dialog( "open" );
         }
-			
+
 	});
 
 Date.prototype.format = function (mask, utc) {
@@ -181,41 +181,41 @@ Date.prototype.format = function (mask, utc) {
         ajax = new Ajax();
         var now = new Date();
     })
-    
+
     $('#attRecords').ready(function(){
         var session = $('#sessId' );
         //console.log(session);
         if(typeof session.val() != 'undefined')
         {
-            
-            ajax.doReq('<?php echo site_url(); ?>/attendance/GetStudentData?session=' + session.val(),callback,null); 
-         }       
+
+            ajax.doReq('<?php echo site_url(); ?>/attendance/GetStudentData?session=' + session.val(),callback,null);
+         }
     })
-    
+
     $('#addChild').click(function(){
         addStudent();
     })
-    
+
     $('#close').click(function(){
         $('#attendanceRecords').show();
         $('#addStudent').hide();
     })
-    
+
     $('#newStudent').click(function(){
         $('#addStudent').hide();
         $('#newStudentForm').show();
     })
-    
+
     $('#cancelAdd').click(function()
     {
          $('#newStudentForm').hide();
-        $('#addStudent').show();       
+        $('#addStudent').show();
     })
-    
+
     $('#find').click(function(){
         searchStudents();
     })
-    
+
     function labChange()
     {
        $('#attRecords').hide();
@@ -223,11 +223,11 @@ Date.prototype.format = function (mask, utc) {
         $('#addChild').hide();
         var labCount = $('#labCount').val();
         var val = $('#lab').val();
-        
+
         $('#ok').remove();
-        
+
         $("#main").mask("Loading...");
-        $.get('attendance/getLabSessions?id=' + val, {}, 
+        $.get('attendance/getLabSessions?id=' + val, {},
             function(returnedData,status)
             {
                 if(status == 'success')
@@ -236,35 +236,35 @@ Date.prototype.format = function (mask, utc) {
                     {
                         $("#sessionSelect").html(returnedData);
                     }
-                        
+
                     else
                     {
                         window.location.href = '<?php echo site_url(); ?>/attendance';
                     }
-                        
+
                 }
                 $("#main").unmask();
             }
-        );  
+        );
     }
-    
+
     function getStudentData()
     {
-        
-        
+
+
         var val = $('#lab').val();
-        
+
         var session = $('#labSession');
-        
+
         if(session.val() == '-1')
             return;
-        
+
         $('#ok').remove();
-        
+
         $('#addToSession').val(session.val());
-        
+
         $("#main").mask("Loading...");
-        $.get('<?php echo site_url(); ?>/attendance/GetStudentData?session=' + session.val() +'&start=1', {}, 
+        $.get('<?php echo site_url(); ?>/attendance/GetStudentData?session=' + session.val() +'&start=1', {},
             function(returnedData,status)
             {
                 if(status == 'success')
@@ -276,24 +276,24 @@ Date.prototype.format = function (mask, utc) {
                         $('#addStudent').hide();
                         $('#attRecords').html(html.active);
                         $('#attRecords').show();
-                        
+
                         if(html.hasOwnProperty('deactive'))
                             $('#attDeRecords').html(html.deactive);
-                            
-                        
+
+
                         $('#addAttendance').show();
                         $('#addChild').show();
                     }
                     else
                         window.location.href = '<?php echo site_url(); ?>/attendance';
-                        
+
                 }
                 $("#main").unmask();
             }
-        );  
-        
+        );
+
     }
-    
+
     function callback(text,object)
     {
         var html = JSON.parse(text);
@@ -301,18 +301,18 @@ Date.prototype.format = function (mask, utc) {
         $('#addStudent').hide();
         $('#attRecords').html(html.active);
         $('#attRecords').show();
-        
+
         if(html.hasOwnProperty('deactive'))
             $('#attDeRecords').html(html.deactive);
-            
-        
-        
+
+
+
         $('#addAttendance').show();
         $('#addChild').show();
         $("#main").unmask();
-        
+
     }
-    
+
     function addStudent()
     {
         $(window).scrollTop(window);
@@ -323,22 +323,22 @@ Date.prototype.format = function (mask, utc) {
             $( "#dialog-message"  ).dialog( "open" );
             return;
         }
-        
+
         $('#attendanceRecords').hide();
         $('#searchResults').html('');
         $('#addStudent').show();
-        
+
     }
-    
+
     function searchByLab()
     {
         var labVal = $('#lab').val();
         var session = $('#lab' + labVal).val();
         if($('#labAdd').val() != '-1')
          {  //ajax.doReq('<?php echo site_url(); ?>/studentdetails/findStudentLab?search=' + $('#labAdd').val() + '&session=' + session,searchCallback,null);
-            
+
             $("#main").mask("Loading...");
-            $.get('<?php echo site_url(); ?>/studentdetails/findStudentLab?search=' + $('#labAdd').val() + '&session=' + session, {}, 
+            $.get('<?php echo site_url(); ?>/studentdetails/findStudentLab?search=' + $('#labAdd').val() + '&session=' + session, {},
                 function(returnedData,status)
                 {
                     if(status == 'success')
@@ -348,21 +348,21 @@ Date.prototype.format = function (mask, utc) {
                             $('#searchResults').html(returnedData);
                         }
                         else
-                            window.location.href = '<?php echo site_url(); ?>/attendance';                        
+                            window.location.href = '<?php echo site_url(); ?>/attendance';
                     }
                     $("#main").unmask();
                 }
             );
         }
     }
-    
+
     function searchStudents()
     {
         var labVal = $('#lab').val();
         var session = $('#lab' + labVal).val();
         //ajax.doReq('<?php echo site_url(); ?>/studentdetails/findStudent?search=' + $('#searchField').val() + '&session=' + session,searchCallback,null);
             $("#main").mask("Loading...");
-            $.get('<?php echo site_url(); ?>/studentdetails/findStudent?search=' + $('#searchField').val() + '&session=' + session, {}, 
+            $.get('<?php echo site_url(); ?>/studentdetails/findStudent?search=' + $('#searchField').val() + '&session=' + session, {},
                 function(returnedData,status)
                 {
                     if(status == 'success')
@@ -372,18 +372,18 @@ Date.prototype.format = function (mask, utc) {
                             $('#searchResults').html(returnedData);
                         }
                         else
-                            window.location.href = '<?php echo site_url(); ?>/attendance';                        
+                            window.location.href = '<?php echo site_url(); ?>/attendance';
                     }
                     $("#main").unmask();
                 }
             );
     }
-    
+
     function searchCallback(text,object)
     {
         $('#searchResults').html(text);
     }
-    
+
 
 
 </script>

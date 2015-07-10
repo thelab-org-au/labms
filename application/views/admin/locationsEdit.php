@@ -1,4 +1,4 @@
-<? echo form_open('admin/alocations/edit/',array('id' => 'parentForm')); ?> 
+<?php echo form_open('admin/alocations/edit/',array('id' => 'parentForm')); ?>
     <input type="hidden" name="id" value="<?php echo $info[0]['id'];?>" />
     <table>
         <thead>
@@ -18,10 +18,10 @@
 
 <script type="text/javascript">
     $('#cancelEdit').click(function(){
-        
+
         $('#addLocation').show("slow");
-        $('#editLocation').hide("slow");       
-        
+        $('#editLocation').hide("slow");
+
     })
 
 </script>

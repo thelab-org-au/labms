@@ -1,30 +1,30 @@
 <div class="full_w" >
 	<div class="h_title"><?php echo $title;?></div>
     <?php $this->load->view('display'); ?>
-    
-<? echo form_open('training/addNew',array('id' => 'parentForm')); ?>
+
+<?php echo form_open('training/addNew',array('id' => 'parentForm')); ?>
 
     <div class="element">
         <label for="trainingDesc">Description</label>
-        <input name="trainingDesc" style="width: 200px;" /> 
-    </div> 
-    
+        <input name="trainingDesc" style="width: 200px;" />
+    </div>
+
     <div class="element">
         <textarea id="trainingContent" name="trainingContent"></textarea>
     </div>
-    
+
     <div class="element">
         <input type="submit" />
     </div>
 </form>
-    
-    
+
+
 </div>
 
 <script type="text/javascript" src="<?php echo base_url();?>js/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
 tinyMCE.init({
-    
+
     //SET FULL url in js/kcfinder/config.php  uploadURL to full domain  http://192.168.0.3/lab/js/kcfinder/upload
         // General options
         mode : "textareas",
@@ -34,7 +34,7 @@ tinyMCE.init({
         width: '100%',
         height: 700,
         file_browser_callback: 'openKCFinder',
-        
+
         convert_urls : false,
 
         // Theme options

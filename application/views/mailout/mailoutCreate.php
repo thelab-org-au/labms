@@ -6,11 +6,11 @@
 
 <div id="mailoutConfirmation" style="display: none;">
     <div class="n_ok" ><p>Your mail out has been sent</p></div>
-    
+
     <form>
         <button onclick="javascript:newMailout();return false;">New mailout</button>
     </form>
-    
+
 </div>
 
 <div id="createMailout">
@@ -18,8 +18,8 @@
         <button onclick="return selectRecipients();">Recipients</button>
         <button onclick="return selectMailout();">Mailout</button>
     </form>
-    
-    <? echo form_open('mailout/sendMailout', array('id' => 'parentForm'));?>
+
+    <?php echo form_open('mailout/sendMailout', array('id' => 'parentForm'));?>
 
 	<div id="labSelect">
             <div class="element">
@@ -28,7 +28,7 @@
                         <label >
                         <input id="selectAll" type="checkbox" name="allLabs" value="1" onclick='allChanged(this);' />
                         Select all&nbsp;&nbsp;
-                        
+
                         <input type="checkbox" name="noneLabs" value="1" onclick='nonChanged(this);' />
                         De-select all&nbsp;&nbsp;
                         </label>
@@ -38,17 +38,17 @@
 
                 <?php
                         echo '<table style="text-align:center;"><thead><tr>';
-                        
+
                         for ($cnt = 0; $cnt < 3; $cnt++)
                         {
                             echo '<th style="width: 50px;">Select</th>';
-                            echo '<th>Location</th>';                      
+                            echo '<th>Location</th>';
                         }
-                        
+
                         echo '</tr></thead><tbody>';
 
                         $count = 0;
-                        
+
                         for ($cnt = 0; $cnt < (sizeof($locations) / 3); $cnt++)
                         {
                             echo '<tr>';
@@ -56,10 +56,10 @@
                             {
                                 if (isset($locations[$count]))
                                 {
-                                    $pre = (in_array($locations[$count]['id'], $userLocations));                       
+                                    $pre = (in_array($locations[$count]['id'], $userLocations));
                                     echo '<td><input type="checkbox" id="lab' . $count . '" name="lab' . $locations[$count]['id'] . '" value="' . $locations[$count]['id'] . '" ' . ($pre == 1 ? 'checked="true"' : '') .
                                         '" onclick="selectLocation()" /></td>';
-                        
+
                                     echo '<td>' . $locations[$count]['name'] . '</td>';
                                 }
                                 else
@@ -72,7 +72,7 @@
                         }
 
                         echo '</tbody></table>';
-                        
+
                         ?>
 
              </div>
@@ -91,15 +91,15 @@
                     <input type="checkbox" name="admins" value="4" onclick='selectAllUsers(this);'/>
 
                     Admins&nbsp;&nbsp;
-                    
+
                     <input type="checkbox" name="maillist" value="6" onclick='selectAllUsers(this);'/>
 
                     Maillist&nbsp;&nbsp;
 
                     </label>
                 </p>
-        </div>       
-        
+        </div>
+
 
 <div id="userData">
 
@@ -109,29 +109,29 @@
     <?php
 
         echo '<table style="text-align:center;"><thead><tr>';
-        
+
         for ($cnt = 0; $cnt < 3; $cnt++)
         {
             echo '<th style="width: 50px;">Select</th>';
             echo '<th>User name</th>';
         }
-        
+
         echo '</tr></thead><tbody>';
 
         $count = 0;
-        
+
         for ($cnt = 0; $cnt < (sizeof($users) / 3); $cnt++)
         {
             echo '<tr>';
-        
+
             for ($cnt2 = 0; $cnt2 < 3; $cnt2++)
             {
                 if (isset($users[$count]))
-                {      
+                {
                     //$pre = (in_array($users[$count]['id'],$userLocations));
                     echo '<span><td><input type="checkbox" id="user' . $count . '" name="user' . $users[$count]['id'] . '" value="' . $users[$count]['id'] . '" userType="' . $users[$count]['userType'] .
                         '" userLocations="' . $users[$count]['locations'] . '" /></td>';
-        
+
                     echo '<td>' . $users[$count]['firstName'] . ' ' . $users[$count]['lastName'] . '</td></span>';
                 }
                 else
@@ -145,20 +145,20 @@
         echo '</tbody></table>';
         ?>
 
-    
- 
+
+
     <script type="text/javascript">
 
 
 
     </script>
 
-    </div>            
+    </div>
 
 	</div>
-    
 
-<!--	 <div class="element" id="selectUsers">   
+
+<!--	 <div class="element" id="selectUsers">
 
 
     <h3>Users</h3>
@@ -174,13 +174,13 @@
             </label>
 
         </p>-->
-        
+
 
     	<div id="createForm" style="display:none">
     			<div class="element">
     				<label for="mailoutDesc">Description</label>
-    				<input id="mailoutDesc" name="mailoutDesc" style="width: 400px;" /> 
-    			</div> 
+    				<input id="mailoutDesc" name="mailoutDesc" style="width: 400px;" />
+    			</div>
 
     			<div class="element">
     				<textarea  id="mailoutContent" name="mailoutContent"></textarea>
@@ -190,7 +190,7 @@
                     <button style="float: right;" onclick="javascript:preview(); return false;">Preview</button>
     				<button style="float: right;" onclick="javascript:send(); return false;">Send</button>
     			</div>
-    	</div>  
+    	</div>
     </form>
 
 </div>
@@ -198,13 +198,13 @@
 <div id="dialog-message-mailout" title="Error" style="display: none;">
   <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
   <span id="dialogMessageMailout" style="color: red;"></span></p>
-  
-</div>
 
 </div>
 
-<link href="<?php echo base_url(); ?>/css/messi.min.css" rel="stylesheet" type="text/css" /> 
-<script type="text/javascript" src="<?php echo base_url(); ?>/js/messi.min.js"></script> 
+</div>
+
+<link href="<?php echo base_url(); ?>/css/messi.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo base_url(); ?>/js/messi.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/tiny_mce/tiny_mce.js"></script>
 
 <script type="text/javascript">
@@ -218,12 +218,12 @@
       buttons: {
         "Close": function() {
           $( this ).dialog( "close" );
-          
+
         }
       }
     });
-    
-    
+
+
         var labCount = <?php echo sizeof($locations);?>;
         function allChanged(all)
         {
@@ -231,22 +231,22 @@
             {
                 for (var cnt = 0; cnt < labCount; cnt++)
                     $('#lab' + cnt).attr('checked','checked');
-                    
+
                 if($('#userData').html() == '')
                 {
                     $("#selectUsers").mask("Processing...");
-                    $.get('mailout/getUsers?all=true', {}, 
+                    $.get('mailout/getUsers?all=true', {},
                         function(returnedData,status)
                         {
                             if(status == 'success')
                             {
                                 $('#userData').hide('fast');
                                 $('#userData').html(returnedData);
-                               
+
                                $('#userOptions input:checked').each(function()
                                 {
                                     selectAllUsers(this);
-                                });    
+                                });
                             }
                             $('#userData').show('fast');
                             $("#selectUsers").unmask();
@@ -258,7 +258,7 @@
             {
                 for (var cnt = 0; cnt < labCount; cnt++)
                     $('#lab' + cnt).removeAttr('checked');
-                    
+
                 $('#userData').hide('fast',function()
                 {
                     $('#userData').html('');
@@ -269,15 +269,15 @@
         function nonChanged(none)
         {
             for (var cnt = 0; cnt < labCount; cnt++)
-                $('#lab' + cnt).removeAttr('checked'); 
+                $('#lab' + cnt).removeAttr('checked');
 
-            $(none).removeAttr('checked'); 
-            $('#selectAll').removeAttr('checked');  
-            
+            $(none).removeAttr('checked');
+            $('#selectAll').removeAttr('checked');
+
             $('#userData').hide('fast',function()
             {
                 $('#userData').html('');
-            });                     
+            });
         }
 
         function allUsersChanged(all)
@@ -298,17 +298,17 @@
         function selectAllUsers(option)
         {
             var type = $(option).val();
-            
+
             if(type == 6)
                 return;
-                                 
+
             var count = <?php echo sizeof($users); ?>;
             for (var cnt = 0; cnt < count; cnt++)
-            {    
+            {
                 if($('#user' + cnt).attr('userType') == type && type != '1')
                 {
                     if(option.checked)
-                      $('#user' + cnt).attr('checked','checked');  
+                      $('#user' + cnt).attr('checked','checked');
                     else
 
                         $('#user' + cnt).removeAttr('checked');
@@ -316,14 +316,14 @@
                 if(type == '1')
                 {
                     if(option.checked)
-                      $('#user' + cnt).attr('checked','checked');  
+                      $('#user' + cnt).attr('checked','checked');
                     else
                         $('#user' + cnt).removeAttr('checked');
-                        
+
                    $('#userOptions input').each(function()
                     {
                         this.checked = option.checked;
-                    });      
+                    });
                 }
             }
         }
@@ -335,10 +335,10 @@
         {
             $('#dialogMessageMailout').html('Please enter mailout description!');
             $( "#dialog-message-mailout"  ).dialog( "open" );
-            return;          
+            return;
         }
-        
-        
+
+
         if(tinyMCE.activeEditor.getContent() != '')
         {
                 var ids = '';
@@ -346,29 +346,29 @@
                 {
                     ids += this.value + ',';
                 });
-                
+
                 ids = ids.substring(0, ids.length - 1);
-                
-                
+
+
                 var labs = '';
                 $('#parentForm :input').each(function(index, elm)
                 {
                     if(elm.name.indexOf("lab") != -1 && elm.checked)
                     {
                         labs += elm.value +',';
-                    }        
+                    }
                 });
-                labs = labs.substring(0, labs.length - 1); 
-                
+                labs = labs.substring(0, labs.length - 1);
+
                 var maillist = false;
                 $('#userOptions :input').each(function()
-                {     
+                {
                     if(this.name == 'maillist')
                         maillist = this.checked;
                 });
-                    
+
                 $("#main").mask("Sending...");
-                $.post('mailout/sendMailout', { mailoutDesc: $('#mailoutDesc').val(), mailoutContent : tinyMCE.activeEditor.getContent(), ids : ids, labs : labs , maillist : maillist}, 
+                $.post('mailout/sendMailout', { mailoutDesc: $('#mailoutDesc').val(), mailoutContent : tinyMCE.activeEditor.getContent(), ids : ids, labs : labs , maillist : maillist},
                     function(returnedData,status)
                     {
                         if(status == 'success')
@@ -376,8 +376,8 @@
                             if(returnedData == '')
                             {
                                 $(window).scrollTop(window);
-                                $("#main").unmask(); 
-                                console.log(returnedData) ; 
+                                $("#main").unmask();
+                                console.log(returnedData) ;
                                 $('#createMailout').hide();
                                 $('#mailoutConfirmation').show();
                             }
@@ -386,11 +386,11 @@
                                 $(window).scrollTop(window);
                                 $('#dialogMessageMailout').html(returnedData);
                                 $( "#dialog-message-mailout"  ).dialog( "open" );
-                                $("#main").unmask(); 
+                                $("#main").unmask();
                             }
-          
+
                         }
-                        
+
                     }
                 );
             //$('#parentForm').submit();
@@ -402,11 +402,11 @@
             $( "#dialog-message-mailout"  ).dialog( "open" );
             return;
         }
-        
 
-        
-        
-    }    
+
+
+
+    }
 
     function preview()
     {
@@ -415,24 +415,24 @@
             $('#dialogMessageMailout').html('Please enter mailout content');
             $( "#dialog-message-mailout"  ).dialog( "open" );
             return;
-        } 
-               
+        }
+
         console.log($('#mailoutContent').val());
-        
+
         $("#main").mask("Processing...");
-        $.post('mailout/preview', { mailoutDesc: $('#mailoutDesc').val(), mailoutContent : tinyMCE.activeEditor.getContent()}, 
+        $.post('mailout/preview', { mailoutDesc: $('#mailoutDesc').val(), mailoutContent : tinyMCE.activeEditor.getContent()},
             function(returnedData,status)
             {
                 if(status == 'success')
                 {
                     $("#main").unmask();
                     $(window).scrollTop(window);
-                    new Messi(returnedData, {title: 'Mailout preview', modal: true});  
-                    console.log(returnedData);                 
+                    new Messi(returnedData, {title: 'Mailout preview', modal: true});
+                    console.log(returnedData);
                 }
             }
         );
-        
+
 
     }
 
@@ -445,37 +445,37 @@
             if(elm.name.indexOf("lab") != -1 && elm.checked)
             {
                 ids += elm.value +',';
-            }        
+            }
         });
-        
 
-        
+
+
         ids = ids.substring(0, ids.length - 1);
-        
+
         if(ids == '')
         {
             $('#userData').hide('fast',function()
             {
                 $('#userData').html('');
             });
-            
+
             return;
         }
-            
-        
+
+
         $("#userData").mask("Processing...");
-        $.get('mailout/getUsers?ids=' + ids, {}, 
+        $.get('mailout/getUsers?ids=' + ids, {},
             function(returnedData,status)
             {
                 if(status == 'success')
                 {
                     $('#userData').hide('fast');
                     $('#userData').html(returnedData);
-                   
+
                    $('#userOptions input:checked').each(function()
                     {
                         selectAllUsers(this);
-                    });    
+                    });
                 }
                 $('#userData').show('fast');
                 $("#userData").unmask();
@@ -491,16 +491,16 @@
         return false;
     }
 
-    
+
 
     function selectMailout()
     {
         $('#labSelect').hide('slow');
         $('#createForm').show('slow');
-        return false;        
+        return false;
     }
-    
-    
+
+
     function newMailout()
     {
         location.reload();

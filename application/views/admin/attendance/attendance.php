@@ -6,105 +6,105 @@
 
     <div id="attendanceRecords">
 
-    
+
 
         <?php $this->load->view('display'); ?>
 
-        
 
-        <? echo form_open('',array('id' => 'parentForm')); ?> 
+
+        <?php echo form_open('',array('id' => 'parentForm')); ?>
 
             <div class="element">
 
-                
 
-            
 
-            
+
+
+
                 <label for="lab">Location</label>
             	<select name="lab" class="err" id="lab" onchange="javascript:updateFields()">
 
             		<option value="-1">-Select Lab-</option>
 
-                    
 
-                    <?php 
+
+                    <?php
 
                         foreach($labData as $lab)
 
                         {
 
-                            echo '<option value="'.$lab['id'].'">'.$labNames[$lab['id']]['name'].'</option>'; 
+                            echo '<option value="'.$lab['id'].'">'.$labNames[$lab['id']]['name'].'</option>';
 
                         }
 
-                           
+
 
                     ?>
 
-                    
+
 
             	</select>
 
-                
+
             <!--
               	<select name="term" class="err" id="term" onchange="javascript:updateFields()" >
 
             		<option value="-1">-Select Term-</option>
 
-                    
 
-                    <?php 
+
+                    <?php
 
                         foreach($labTerms as $lab)
 
                         {
 
-                            echo '<option value="'.$lab['id'].'">'.$lab['desc'].'</option>'; 
+                            echo '<option value="'.$lab['id'].'">'.$lab['desc'].'</option>';
 
 
 
                         }
 
-                           
+
 
                     ?>
 
-                    
 
-            	</select>  
 
-                
+            	</select>
+
+
 
               	<select name="session" class="err" id="session" onchange="javascript:updateFields()">
 
             		<option value="-1">-Select Session-</option>
 
-                    
 
-                    <?php 
+
+                    <?php
 
                         foreach($labSessions as $lab)
 
                         {
 
-                            echo '<option value="'.$lab['id'].'">'.$lab['desc'].'</option>'; 
+                            echo '<option value="'.$lab['id'].'">'.$lab['desc'].'</option>';
 
 
 
                         }
 
-                           
+
 
                     ?>
 
-                    
 
-            	</select>            
+
+            	</select>
             -->
-                
 
-                
+
+
 
                 <!--<button id="search">Search</button>-->
 
@@ -114,17 +114,17 @@
 
     </div>
 
-    
+
 
     <div id="attRecords">
 
-    
+
 
     </div>
 
 
 
-    
+
 
 </div>
 
@@ -144,7 +144,7 @@
 
     })
 
-    
+
 
     $('#search').click(function(e)
 
@@ -158,9 +158,9 @@
 
     });
 
-    
 
-    
+
+
 
     function updateFields()
 
@@ -169,19 +169,19 @@
 
                                                                         '&term='+$('#term').val()+
 
-                                                                        '&session=' + $('#session').val(),callback,null);*/   
-                                                                        
-        ajax.doReq('<?php echo site_url(); ?>/admin/aAttendance/getLocationData?location=' + $('#lab').val(),callback,null);     
+                                                                        '&session=' + $('#session').val(),callback,null);*/
+
+        ajax.doReq('<?php echo site_url(); ?>/admin/aAttendance/getLocationData?location=' + $('#lab').val(),callback,null);
 
     }
 
-  
+
 
     function callback(text,object)
 
     {
 
-        $('#attRecords').html(text);    
+        $('#attRecords').html(text);
 
     }
 
