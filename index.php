@@ -19,7 +19,8 @@ ini_set('display_errors', 1);
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-  define('ENVIRONMENT', 'development');
+  $_env = getenv('CI_ENV');
+  define('ENVIRONMENT', ($_env ? $_env : 'production'));
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
