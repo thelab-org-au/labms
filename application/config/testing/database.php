@@ -3,7 +3,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = trim(`boot2docker ip`);
+$db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'user';
 $db['default']['password'] = 'password';
 $db['default']['database'] = 'db';

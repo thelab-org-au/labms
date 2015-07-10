@@ -20,3 +20,6 @@ Run `docker start labms` to bring the environment up again. This time it should 
 
 ### Set up the database:
 
+Run the migrations to create the development database:
+
+`CI_ENV=development php index.php migrate`

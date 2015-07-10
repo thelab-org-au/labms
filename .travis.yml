@@ -2,5 +2,16 @@ language: php
 php:
   - 5.4
 
+env:
+  - CI_ENV=testing
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e "CREATE DATABASE IF NOT EXISTS db;" -uroot
+  - mysql -e "GRANT ALL PRIVILEGES ON db.* TO user@localhost IDENTIFIED BY 'password';" -uroot
+  - php index.php migrate
+
 script:
   - phpunit
