@@ -1,0 +1,124 @@
+[17-Oct-2013 19:18:44 America/Denver] PHP Warning:  Unterminated comment starting line 120 in /home1/surefire/public_html/oztron/lab/application/core/MY_Controller.php on line 120
+[17-Oct-2013 19:18:44 America/Denver] PHP Parse error:  syntax error, unexpected $end, expecting T_FUNCTION in /home1/surefire/public_html/oztron/lab/application/core/MY_Controller.php on line 121
+[17-Oct-2013 23:15:34 America/Denver] PHP Parse error:  syntax error, unexpected T_ECHO in /home1/surefire/public_html/oztron/lab/application/views/admin/locations.php on line 23
+[17-Oct-2013 23:38:51 America/Denver] PHP Parse error:  syntax error, unexpected '(', expecting T_STRING or T_VARIABLE or '{' or '$' in /home1/surefire/public_html/oztron/lab/application/views/admin/locations.php on line 30
+[20-Oct-2013 16:36:33 America/Denver] PHP Fatal error:  Call to a member function get() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/ausers.php on line 67
+[20-Oct-2013 18:51:16 America/Denver] PHP Parse error:  syntax error, unexpected '/' in /home1/surefire/public_html/oztron/lab/application/views/training/training.php on line 11
+[20-Oct-2013 18:51:19 America/Denver] PHP Parse error:  syntax error, unexpected '/' in /home1/surefire/public_html/oztron/lab/application/views/training/training.php on line 11
+[21-Oct-2013 19:38:57 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'application/controllers/signup/parentsignup.php' (include_path='.:/usr/php/53/usr/lib64:/usr/php/53/usr/share/pear') in /home1/surefire/public_html/oztron/lab/application/controllers/signup/mailinglist.php on line 3
+[21-Oct-2013 23:26:43 America/Denver] PHP Fatal error:  Call to undefined method Mailout::preRender() in /home1/surefire/public_html/oztron/lab/application/controllers/mailout.php on line 21
+[21-Oct-2013 23:27:46 America/Denver] PHP Fatal error:  Call to undefined method Mailout::preRender() in /home1/surefire/public_html/oztron/lab/application/controllers/mailout.php on line 21
+[21-Oct-2013 23:28:06 America/Denver] PHP Fatal error:  Call to undefined method Mailout::mailout() in /home1/surefire/public_html/oztron/lab/application/controllers/mailout.php on line 26
+[21-Oct-2013 23:28:26 America/Denver] PHP Fatal error:  Call to undefined method Mailout::preRender() in /home1/surefire/public_html/oztron/lab/application/controllers/mailout.php on line 22
+[23-Oct-2013 16:41:39 America/Denver] PHP Fatal error:  Call to a member function updateMentor() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/signup/mentor.php on line 64
+[23-Oct-2013 19:19:03 America/Denver] PHP Fatal error:  Uncaught exception 'Exception' with message 'DateTime::__construct(): Failed to parse time string (d-m-y) at position 1 (-): Unexpected character' in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php:66
+Stack trace:
+#0 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(66): DateTime->__construct('d-m-y')
+#1 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(56): Amentors->calcAge('09/11/1979')
+#2 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(47): Amentors->getAge(Array)
+#3 [internal function]: Amentors->getMentorApplications()
+#4 /home1/surefire/public_html/oztron/lab/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#5 /home1/surefire/public_html/oztron/lab/index.php(202): require_once('/home1/surefire...')
+#6 {main}
+  thrown in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 66
+[23-Oct-2013 19:20:07 America/Denver] PHP Fatal error:  Uncaught exception 'Exception' with message 'DateTime::__construct(): Failed to parse time string (dd/mm/yy) at position 0 (d): The timezone could not be found in the database' in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php:66
+Stack trace:
+#0 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(66): DateTime->__construct('dd/mm/yy')
+#1 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(56): Amentors->calcAge('09/11/1979')
+#2 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(47): Amentors->getAge(Array)
+#3 [internal function]: Amentors->getMentorApplications()
+#4 /home1/surefire/public_html/oztron/lab/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#5 /home1/surefire/public_html/oztron/lab/index.php(202): require_once('/home1/surefire...')
+#6 {main}
+  thrown in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 66
+[23-Oct-2013 19:21:22 America/Denver] PHP Fatal error:  Uncaught exception 'Exception' with message 'DateTime::__construct(): Failed to parse time string (23/10/2013) at position 0 (2): Unexpected character' in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php:66
+Stack trace:
+#0 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(66): DateTime->__construct('23/10/2013')
+#1 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(56): Amentors->calcAge('09/11/1979')
+#2 /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php(47): Amentors->getAge(Array)
+#3 [internal function]: Amentors->getMentorApplications()
+#4 /home1/surefire/public_html/oztron/lab/system/core/CodeIgniter.php(359): call_user_func_array(Array, Array)
+#5 /home1/surefire/public_html/oztron/lab/index.php(202): require_once('/home1/surefire...')
+#6 {main}
+  thrown in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 66
+[23-Oct-2013 22:05:22 America/Denver] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ',' or ';' in /home1/surefire/public_html/oztron/lab/application/views/admin/mentor/view.php on line 100
+[23-Oct-2013 22:10:03 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::where() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 113
+[23-Oct-2013 22:10:15 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::where() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 113
+[23-Oct-2013 22:10:35 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::where() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 113
+[23-Oct-2013 22:11:04 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::where() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 113
+[23-Oct-2013 22:12:12 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::where() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 113
+[23-Oct-2013 22:12:26 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::where() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 113
+[23-Oct-2013 22:12:57 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::where() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 113
+[23-Oct-2013 22:13:14 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::where() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 113
+[23-Oct-2013 22:17:40 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 100
+[23-Oct-2013 22:18:01 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 98
+[23-Oct-2013 22:18:19 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 98
+[23-Oct-2013 22:18:44 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 98
+[23-Oct-2013 22:19:14 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 99
+[23-Oct-2013 22:19:44 America/Denver] PHP Fatal error:  Cannot use string offset as an array in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 107
+[24-Oct-2013 03:15:53 America/Denver] PHP Fatal error:  Call to a member function where() on a non-object in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 135
+[24-Oct-2013 21:14:40 America/Denver] PHP Fatal error:  Call to undefined function getAge() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/amentors.php on line 96
+[27-Oct-2013 22:11:10 America/Denver] PHP Fatal error:  Call to a member function where() on a non-object in /home1/surefire/public_html/oztron/lab/application/models/studentmodel.php on line 122
+[06-Nov-2013 17:07:34 America/Denver] PHP Fatal error:  Call to undefined method Admin_model::getAllSessions() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 58
+[06-Nov-2013 18:12:39 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 237
+[06-Nov-2013 18:12:48 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 237
+[06-Nov-2013 18:13:02 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 237
+[06-Nov-2013 18:13:24 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 237
+[06-Nov-2013 18:13:58 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 237
+[06-Nov-2013 18:14:12 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 237
+[06-Nov-2013 18:14:36 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 237
+[06-Nov-2013 18:15:05 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 237
+[06-Nov-2013 18:15:40 America/Denver] PHP Fatal error:  Call to undefined method CI_DB_mysql_driver::insertData() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 236
+[06-Nov-2013 18:17:39 America/Denver] PHP Fatal error:  Call to undefined method CI_DB_mysql_driver::insertData() in /home1/surefire/public_html/oztron/lab/application/models/admin_model.php on line 236
+[06-Nov-2013 20:37:03 America/Denver] PHP Parse error:  syntax error, unexpected T_ELSE in /home1/surefire/public_html/oztron/lab/application/views/admin/sessions/showsessions.php on line 39
+[19-Nov-2013 19:41:35 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'application/controllers/signup/parentsignup.php' (include_path='.:/usr/php/53/usr/lib64:/usr/php/53/usr/share/pear') in /home1/surefire/public_html/oztron/lab/application/controllers/user/signup.php on line 3
+[19-Nov-2013 19:46:00 America/Denver] PHP Fatal error:  Class 'MY_Controller' not found in /home1/surefire/public_html/oztron/lab/application/controllers/user/profile.php on line 6
+[19-Feb-2014 01:26:02 America/Denver] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE) in /home1/surefire/public_html/oztron/lab/application/controllers/mailout.php on line 107
+[19-Feb-2014 22:52:40 America/Denver] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting ',' or ';' in /home1/surefire/public_html/oztron/lab/application/views/admin/student/details.php on line 89
+[20-Feb-2014 17:07:27 Australia/Melbourne] PHP Parse error:  syntax error, unexpected ')', expecting ']' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 36
+[20-Feb-2014 17:07:46 Australia/Melbourne] PHP Parse error:  syntax error, unexpected '!' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 36
+[20-Feb-2014 17:07:49 Australia/Melbourne] PHP Parse error:  syntax error, unexpected '!' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 36
+[20-Feb-2014 17:08:00 Australia/Melbourne] PHP Parse error:  syntax error, unexpected ''&nbsp;<select  name="lab'' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 37
+[20-Feb-2014 17:08:03 Australia/Melbourne] PHP Parse error:  syntax error, unexpected ''&nbsp;<select  name="lab'' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 37
+[20-Feb-2014 17:08:13 Australia/Melbourne] PHP Parse error:  syntax error, unexpected '!' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 36
+[20-Feb-2014 17:08:25 Australia/Melbourne] PHP Parse error:  syntax error, unexpected '!' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 36
+[20-Feb-2014 17:18:58 Australia/Melbourne] PHP Parse error:  syntax error, unexpected '[' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 42
+[20-Feb-2014 17:19:20 Australia/Melbourne] PHP Parse error:  syntax error, unexpected '[' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 42
+[20-Feb-2014 17:19:38 Australia/Melbourne] PHP Parse error:  syntax error, unexpected '[' in /home1/surefire/public_html/oztron/lab/application/views/attendance/attendance.php on line 43
+[24-Feb-2014 09:32:25 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 120
+[25-Feb-2014 07:10:50 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 120
+[25-Feb-2014 07:22:13 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 120
+[25-Feb-2014 07:22:51 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 121
+[25-Feb-2014 07:23:01 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 122
+[25-Feb-2014 07:23:23 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 122
+[25-Feb-2014 07:23:36 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 123
+[25-Feb-2014 07:23:49 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 124
+[25-Feb-2014 07:24:26 Australia/Melbourne] PHP Fatal error:  Call to undefined method Asessions::datediffInWeeks() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/asessions.php on line 124
+[07-May-2014 12:02:35 Australia/Melbourne] PHP Parse error:  syntax error, unexpected 'endforeach' (T_ENDFOREACH) in /home1/surefire/public_html/oztron/lab/application/views/profile/childInfo.php on line 67
+[07-May-2014 17:01:37 Australia/Melbourne] PHP Parse error:  syntax error, unexpected end of file in /home1/surefire/public_html/oztron/lab/application/controllers/user/profile.php on line 206
+[07-May-2014 22:38:24 Australia/Melbourne] PHP Fatal error:  Call to undefined method Profile::getMaillistData() in /home1/surefire/public_html/oztron/lab/application/controllers/user/profile.php on line 52
+[07-May-2014 22:38:43 Australia/Melbourne] PHP Fatal error:  Call to undefined method Profile::getMaillistData() in /home1/surefire/public_html/oztron/lab/application/controllers/user/profile.php on line 52
+[08-May-2014 09:41:29 Australia/Melbourne] PHP Fatal error:  Call to undefined method Profile::profile() in /home1/surefire/public_html/oztron/lab/application/controllers/user/profile.php on line 28
+[08-May-2014 20:08:45 Australia/Melbourne] PHP Fatal error:  Call to undefined method Waitlist::preRender() in /home1/surefire/public_html/oztron/lab/application/controllers/waitlist.php on line 23
+[08-May-2014 20:09:10 Australia/Melbourne] PHP Fatal error:  Call to undefined method Waitlist::init() in /home1/surefire/public_html/oztron/lab/application/controllers/waitlist.php on line 36
+[15-May-2014 17:47:26 Australia/Melbourne] PHP Fatal error:  Call to a member function getAllSessions() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 49
+[16-May-2014 11:24:54 Australia/Melbourne] PHP Fatal error:  Call to a member function diff() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 91
+[16-May-2014 11:25:11 Australia/Melbourne] PHP Fatal error:  Call to a member function diff() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 91
+[16-May-2014 11:26:30 Australia/Melbourne] PHP Fatal error:  Call to a member function diff() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 91
+[16-May-2014 11:27:08 Australia/Melbourne] PHP Fatal error:  Call to a member function diff() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 91
+[16-May-2014 11:27:32 Australia/Melbourne] PHP Fatal error:  Call to a member function diff() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 91
+[16-May-2014 11:35:11 Australia/Melbourne] PHP Fatal error:  Call to a member function diff() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 86
+[16-May-2014 11:35:39 Australia/Melbourne] PHP Fatal error:  Call to a member function format() on a non-object in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 87
+[16-May-2014 12:42:12 Australia/Melbourne] PHP Parse error:  syntax error, unexpected end of file in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 57
+[16-May-2014 13:33:09 Australia/Melbourne] PHP Fatal error:  Call to undefined function datediff() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/cost.php on line 76
+[16-May-2014 17:19:10 Australia/Melbourne] PHP Parse error:  syntax error, unexpected end of file, expecting ',' or ';' in /home1/surefire/public_html/oztron/lab/application/views/admin/sessions/sessions.php on line 222
+[16-May-2014 20:56:11 Australia/Melbourne] PHP Fatal error:  Call to undefined method Admin_model::getWaitlistStudents() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/assignSession.php on line 34
+[16-May-2014 20:56:50 Australia/Melbourne] PHP Fatal error:  Call to undefined method Admin_model::getWaitlistStudents() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/assignSession.php on line 34
+[16-May-2014 20:59:02 Australia/Melbourne] PHP Fatal error:  Call to undefined method Admin_model::getWaitlistStudents() in /home1/surefire/public_html/oztron/lab/application/controllers/admin/assignSession.php on line 34
+[16-May-2014 21:00:41 Australia/Melbourne] PHP Fatal error:  Call to a member function where() on a non-object in /home1/surefire/public_html/oztron/lab/application/models/assign_model.php on line 16
+[30-Jun-2014 08:13:18 Australia/Melbourne] PHP Parse error:  syntax error, unexpected end of file in /home1/surefire/public_html/oztron/lab/application/controllers/attendance.php on line 51
+[30-Jun-2014 11:37:35 Australia/Melbourne] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 131596288 bytes) in /home1/surefire/public_html/oztron/lab/application/views/admin/attendance/attendance.php on line 36
+[30-Jun-2014 14:32:58 Australia/Melbourne] PHP Fatal error:  Call to a member function where() on a non-object in /home1/surefire/public_html/oztron/lab/application/models/attendancemodel.php on line 67
+[30-Jun-2014 15:11:47 Australia/Melbourne] PHP Fatal error:  Cannot use string offset as an array in /home1/surefire/public_html/oztron/lab/application/controllers/admin/aAttendance.php on line 43
+[30-Jun-2014 15:12:14 Australia/Melbourne] PHP Fatal error:  Cannot use string offset as an array in /home1/surefire/public_html/oztron/lab/application/controllers/admin/aAttendance.php on line 43
+[30-Jun-2014 15:41:04 Australia/Melbourne] PHP Fatal error:  Call to undefined function var_dupmp() in /home1/surefire/public_html/oztron/lab/application/views/admin/attendance/attendance.php on line 33
