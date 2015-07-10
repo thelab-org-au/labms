@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/thelab-org-au/labms.svg?branch=master)](https://travis-ci.org/thelab-org-au/labms)
+
 ## Set up dev environment:
 
 ### Install docker:
