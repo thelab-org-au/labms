@@ -9,7 +9,7 @@ class Migration_Add_mentorexperience extends CI_Migration {
   }
 
   public function up() {
-    $this->db->query('CREATE TABLE `mentorexperience` (
+    $this->db->query('CREATE TABLE IF NOT EXISTS `mentorexperience` (
       `mentor` int(11) NOT NULL,
       `tech` int(11) NOT NULL,
       `level` int(3) NOT NULL,

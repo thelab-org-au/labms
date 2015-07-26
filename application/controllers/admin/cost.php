@@ -2,7 +2,7 @@
 
 //require_once APPPATH.'controllers/signup/basesignup.php';
 
-class Cost extends MY_Controller 
+class Cost extends MY_Controller
 {
     public $termModel;
     function __construct()
@@ -11,11 +11,11 @@ class Cost extends MY_Controller
         $this->load->model('admin_model','model');
         $this->mainContent = 'admin/sessions/cost';
         $this->title = 'Admin';
-        $this->baseSeg = 3; 
-        
+        $this->baseSeg = 3;
+
         $this->load->model('term_model','termModel');
     }
-    
+
 	public function index()
 	{
          if ($this->uri->segment($this->baseSeg) === FALSE)
@@ -26,17 +26,15 @@ class Cost extends MY_Controller
         {
             $func = $this->uri->segment($this->baseSeg);
             $this->$func();
-        } 
+        }
 	}
-    
-    private function preRender()
-    {
-        $this->init();
-        $this->loginRequired = true;
-        $this->CheckLogin();
+
+    private function preRender() {
+      $this->init();
+      $this->redirectIfNotLoggedIn();
     	$this->render();
     }
-    
+
     private function init()
     {
         $locationIds = $terms = $sessions = array();
@@ -88,28 +86,28 @@ class Cost extends MY_Controller
         }
 
 
-       
+
     }
-    
+
     public function getLocationData()
     {
         $data['location'] = (int)$this->input->get('location');
-        $data['termSession'] = $this->model->getTermSessionData($data['location']);   
-        
-        echo $this->load->view('admin/sessions/costTable', $data, true);  
+        $data['termSession'] = $this->model->getTermSessionData($data['location']);
+
+        echo $this->load->view('admin/sessions/costTable', $data, true);
     }
-    
+
     public function setCost()
     {
         $id = $this->input->post('termSession',true);
-        
+
         $data = array
         (
             'termSessionId' => $id,
             'full' => $this->input->post('full',true),
             'con' => $this->input->post('con',true)
-        );  
-        
+        );
+
         $costId = $this->model->getSessionCost($id);
         if(count($costId) == 0)
         {
@@ -119,13 +117,13 @@ class Cost extends MY_Controller
         {
             $costId = $costId[0]['id'];
             $this->model->updateCost($costId,$data);
-        }     
-        
+        }
+
         $this->session->set_userdata('ok', 'Session cost added');
         $this->preRender();
         //redirect('admin/cost');
     }
-    
+
     public function addCost()
     {
         if($this->validateCost())
@@ -161,12 +159,12 @@ class Cost extends MY_Controller
        /* echo $this->getUserLevel();
         return;
         $data = date('d/m/Y');
-        
+
         echo $this->datediff($data,'03/07/2014');*/
-        
+
         //var_dump($_POST);
     }
-    
+
     public function datediff($date1, $date2)
     {
         $first = date_create_from_format('d/m/Y', $date1);

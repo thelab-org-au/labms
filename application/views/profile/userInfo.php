@@ -1,56 +1,35 @@
 <div id="userInfoDisplay" >
-    <h2>My information</h2>
-    <?php echo form_open('user/profile/updateUser/',array('id' => 'updateUserForm')); ?>
+  <h2>My information</h2>
+  <?php echo form_open(
+    'user/profile',
+    array('id' => 'updateUserForm'),
+    array('id' => $user_id)
+  ) ?>
 
-        <div class="element">
-            <input type="hidden" name="userId" value="<?php echo $userData['id'] ?>" />
-            <label for="fname">First name</label>
-    		    <input id="fname" name="fname" class="text err" value="<?php echo $userData['firstName'] ?>" />
-            <br />
-            <br />
-            <label for="lname">Surname</label>
-    		    <input id="lname" name="lname" class="text err" value="<?php echo $userData['lastName'] ?>"/>
-        </div>
+    <?php foreach($field_groups as $group): ?><div class="element">
+      <?php foreach($group as $field):
 
-        <div class="element">
-            <label for="phone">Phone </label>
-    		    <input id="phone" name="phone" class="text err"  value="<?php echo $userData['phone'] ?>" />
-        </div>
+        echo form_label($field['label'], $field['name']);
+        switch($field['type']):
+          case 'text':
+            echo form_input($field['name'], set_value($field['name'], $field['default']), 'class="text err"');
+            break;
+          case 'password':
+            echo form_password($field['name'], '', 'class="text err"');
+            break;
+        endswitch;
+        echo form_error($field['name']);
 
-        <div class="element">
-            <label for="address">Address</label>
-            <input id="address" name="address" class="text err" value="<?php echo $userData['address'] ?>"/>
-            <br />
-            <br />
-            <label for="suburb">Suburb </label>
-            <input id="suburb" name="suburb" class="text err" value="<?php echo $userData['suburb'] ?>"/>
-            <br />
-            <br />
-            <label for="postcode">Postcode </label>
-            <input  id="postcode" name="postcode" class="text err" value="<?php echo $userData['postcode'] ?>" />
-        </div>
+        ?><br /><br />
 
-        <div class="element">
-        		<label for="email">Your Email </label>
-            <input id="email" name="email" class="text err"  value="<?php echo $userData['email'] ?>"/>
-            <br />
-            <br />
-            <label for="pass">Update password (Min length 8) </label>
-            <input type="password" id="pass" name="pass" class="text err" value="" />
-            <span id="passVal" style="display: none; color: red; font-size: 14px;">&nbsp; &nbsp;Password is required</span>
-            <span id="passVallength" style="display: none; color: red; font-size: 14px;">&nbsp; &nbsp;Password minimum length 8</span>
-            <br />
-            <br />
-            <label for="passCon">Password confirmation </label>
-            <input type="password" id="passCon" name="passCon" class="text err" />
-            <span id="passConVal" style="display: none; color: red; font-size: 14px;">&nbsp; &nbsp;Password confirmation does not match password</span>
-    	</div>
+      <?php endforeach ?>
+    </div><?php endforeach ?>
 
-        <div class="element">
-            <button>Update</button>
-        </div>
+    <div class="element">
+      <button>Update</button>
+    </div>
 
-    </form>
+  </form>
 
 </div>
 <script type="text/javascript">

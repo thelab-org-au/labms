@@ -2,7 +2,7 @@
 
 
 
-class Add_student extends MY_Controller 
+class Add_student extends MY_Controller
 
 {
 
@@ -19,7 +19,7 @@ class Add_student extends MY_Controller
 
     }
 
-    
+
 
 	public function index()
 	{
@@ -28,18 +28,18 @@ class Add_student extends MY_Controller
        $valError;
         if($this->validate())
         {
-            
+
             $data['name'] = $this->input->post('name',true);
             $data['contact_email'] = $this->input->post('contactEmail',true);
-            
+
             if(!$this->model->validate(trim($data['name']),trim($data['contact_email'])))
             {
                 echo 'Student and contact already exists';
                 return;
             }
-            
+
             $data['contact_phone'] = $this->input->post('phone',true);
-            
+
             $sessionData['session'] = (int)$this->input->post('addToSession',true);
             $sessionData['student'] = $this->model->addStudent($data);
             $sessionData['active'] = 1;
@@ -51,39 +51,24 @@ class Add_student extends MY_Controller
                     echo 'true';
                     return;
                 }
-                    
+
             }
-            
-            echo null;      
-            
-            //$this->preRender();          
+
         }
         else
-            echo validation_errors(); 
+            echo validation_errors();
 	}
 
-    
+
     protected function validate()
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('contactEmail', 'Email', 'trim|valid_email|required|xss_clean');
         $this->form_validation->set_rules('phone', 'Contact phone', 'trim|required|xss_clean');
         $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
-        
-        return $this->form_validation->run();        
+
+        return $this->form_validation->run();
     }
-    
 
-    private function preRender()
-
-    {
-
-        $this->loginRequired = true;
-
-        $this->CheckLogin();
-
-    	$this->render();         
-
-    }
 
  }

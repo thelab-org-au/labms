@@ -2,7 +2,7 @@
 
 require_once APPPATH.'controllers/signup/basesignup.php';
 
-class Mentor extends Basesignup 
+class Mentor extends Basesignup
 {
     function __construct()
     {
@@ -13,7 +13,7 @@ class Mentor extends Basesignup
         $this->data['mentorForm'] = true;
         $this->mainContent = 'forms/mentorform';
         $this->title = 'Mentor signup';
-        $this->baseSeg = 3;      
+        $this->baseSeg = 3;
     }
 
 	public function index()
@@ -28,78 +28,76 @@ class Mentor extends Basesignup
             $this->$func();
         }
 	}
-    
+
     private function preRender()
     {
-        $this->loginRequired = false;
-        $this->CheckLogin();
-    	$this->render();         
+    	$this->render();
     }
-    
+
     public function signup()
     {
         $this->load->model('signup/mentormodel','model');
         if($this->validateMentor())
         {
-            $returnData = $this->createBaseUser(false); 
-            
+            $returnData = $this->createBaseUser(false);
+
             if($returnData !== false)
             {
                 $returnData['mentorId'] = $this->addMentorDetails($returnData);
                 $this->addApplication($returnData);
-                
+
                 $succsess = true;
-                
+
                 if (!empty($_FILES['userfile']['name']))
                 {
                     $path = $_FILES['userfile']['name'];
                     $ext = pathinfo($path, PATHINFO_EXTENSION);
                     $name = $this->input->post('fname').'_'.$this->input->post('lname').'_'.$returnData['id'];
                     $succsess = $this->do_upload($name);
-                    
+
                     $fileData = $this->upload->data();
                     $updateData['origFileName'] = $fileData['client_name'];
                     $updateData['fileName'] = $fileData['orig_name'];
-                    
+
                     $this->model->updateMentor($returnData['mentorId'],$updateData);
-                } 
-                    
+                }
+
 
                 if($succsess === true)
                 {
                     //$this->confirmSignup($returnData,'/signup/waitlist/confirm','emailTemplate/mentor');
                     if(!$this->isLoggedin())
                         $this->sendConfirmation('/signup/waitlist/confirm','emailtemplate/mentor',$returnData);
-    
+
                     $this->data['hTitle'] = 'Mentor job application';
-                    
+
                     if(!$this->isLoggedin())
                         $this->session->set_userdata('ok', 'Sign up completed.<br/>An email has been sent to ' .$returnData['email'] . '.<br/>Please click the link in the email to confirm your details' );
                     else
                         $this->session->set_userdata('ok', 'Sign up completed.' );
-                        
-    
+
+
                    if(!$this->isLoggedin())
                    {
                         $this->mainContent = 'confirmations/confirmation';
-                         $this->preRender();         
+                         $this->preRender();
                    }
                    else
-                        redirect(site_url().'/user/profile', 'refresh');                    
+                        redirect(site_url().'/user/profile', 'refresh');
                 }
                 else
                 {
                     $this->data['error'] = $succsess;
                     $this->preRender();
                 }
-            }       
+            }
         }
         else
         {
             $this->preRender();
         }
     }
-    
+
     private function validateMentor()
     {
         $this->load->library('form_validation');
@@ -108,19 +106,19 @@ class Mentor extends Basesignup
         $this->form_validation->set_rules('crime', '<b>Criminal convictions</b>', 'required');
         $this->form_validation->set_rules('crimeDetails', '<b>Conviction details</b>', 'trim|xss_clean');
         $this->form_validation->set_rules('workChild', '<b>Working with Children Check</b>', 'required');
-        
+
         foreach($this->data['techs'] as $tech)
             $this->form_validation->set_rules('expTech'.$tech['name'], '<b>'.$tech['desc'].'</b>', 'required|xss_clean');
-            
+
         $this->form_validation->set_rules('otherSkills', '<b>Other skills</b>', 'trim|xss_clean');
         $this->form_validation->set_rules('references', '<b>References </b>', 'trim|required|xss_clean');
         $this->form_validation->set_rules('workExperience', '<b>Work Experience </b>', 'trim|required|xss_clean');
         $this->form_validation->set_rules('contactEmployer', '<b>Contact employer</b>', 'required');
         $this->form_validation->set_rules('addInfo', '<b>Additional Information</b>', 'trim|xss_clean');
-        
-        return $this->form_validation->run(); 
+
+        return $this->form_validation->run();
     }
-    
+
     private function addMentorDetails($returnData)
     {
          $data['user'] = $returnData['id'];
@@ -136,13 +134,13 @@ class Mentor extends Basesignup
          $data['workExp'] = $this->input->post('workExperience',true);
          $data['contactEmployer'] = $this->input->post('contactEmployer');
          $data['addInfo'] = $this->input->post('addInfo',true);
-         
+
         $mentorId = $this->model->addMentor($data);
         $this->addExperience($mentorId);
-        
+
         return $mentorId;
     }
-    
+
     private function addExperience($mentorId)
     {
         foreach($this->data['techs'] as $tech)
@@ -153,14 +151,14 @@ class Mentor extends Basesignup
             $this->model->addMentorExp($data);
         }
     }
-    
+
     private function addApplication($returnData)
     {
         $data['mentor'] = $returnData['mentorId'];
         $data['location'] = $this->input->post('lab');
         $this->model->addApplication($data);
     }
-    
+
 	/*private function do_upload($fileName)
 	{
 		$config['upload_path'] = './uploads/';
@@ -181,5 +179,5 @@ class Mentor extends Basesignup
 		{
             return true;
 		}
-	} */  
+	} */
 }

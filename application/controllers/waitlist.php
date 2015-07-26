@@ -2,7 +2,7 @@
 
 //require_once APPPATH.'controllers/signup/basesignup.php';
 
-class Waitlist extends MY_Controller 
+class Waitlist extends MY_Controller
 {
     function __construct()
     {
@@ -10,10 +10,10 @@ class Waitlist extends MY_Controller
         $this->load->model('profile_model','model');
         $this->mainContent = 'profile/profile';
         $this->title = 'Waitlist';
-        
-        $this->baseSeg = 3; 
+
+        $this->baseSeg = 3;
     }
-    
+
 	public function index()
 	{
 
@@ -28,17 +28,14 @@ class Waitlist extends MY_Controller
             $this->$func();
         }
 	}
- 
-    private function preRender()
-    {
-	    $this->loginRequired = true;
-        $this->CheckLogin();
-        $this->init(); 
-	//	$this->render();         
-    }
-    
+
+  private function preRender() {
+    $this->redirectIfNotLoggedIn();
+    $this->init();
+  }
+
     private function init()
     {
-        
+
     }
 }

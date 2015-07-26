@@ -9,9 +9,7 @@
  * @version 2013
  * @access public
  */
-abstract class MY_Controller extends CI_Controller
-{
-    protected $loginRequired = true;
+abstract class MY_Controller extends CI_Controller {
     public $model = null;
     protected $data = array();
     protected $title = '';
@@ -29,22 +27,20 @@ abstract class MY_Controller extends CI_Controller
      * @param mixed $mc
      * @return
      */
-    function __construct($modelName = null,$t = null, $mc = null)
-    {
+    function __construct($modelName = null, $t = null, $mc = null) {
         parent::__construct();
         $this->data['error'] = null;
         $this->data['ok'] = null;
         if($modelName != null) $this->Setup($modelName);
-        $this->data['loggedin'] = $this->isLoggedin();
+        $this->load->model('user');
     }
 
     /**
      * MY_Controller::ConfigEmail()
      *
-     * @return
+     * @TODO: move this into uh config section?????
      */
-    protected function ConfigEmail()
-    {
+    protected function ConfigEmail() {
         $this->config->set_item('protocol', 'smtp');
         $this->config->set_item('smtp_host', 'ssl://box1030.bluehost.com');
         $this->config->set_item('smtp_port', 465);
@@ -53,20 +49,13 @@ abstract class MY_Controller extends CI_Controller
         $this->config->set_item('default_from', 'no-reply@thelab.org.au');
     }
 
-    /**
-     * MY_Controller::render()
-     *
-     * @return
-     */
-    protected function render()
-    {
-        $user = $this->session->userdata('user');
-        $this->data['userName'] = $user['firstName'];
-        $this->mainNav($user['type']);
-         $this->data['title'] = $this->title;
-        $this->data['mainContent'] = $this->mainContent;
-        $this->data['topNav'] = $this->topNav;
-        $this->load->view($this->template,$this->data);
+    protected function render() {
+      $this->data['userName'] = $this->user->getFirstName();
+      $this->mainNav($this->user->getType());
+      $this->data['title'] = $this->title;
+      $this->data['mainContent'] = $this->mainContent;
+      $this->data['topNav'] = $this->topNav;
+      $this->load->view($this->template, $this->data);
     }
 
     /**
@@ -75,8 +64,7 @@ abstract class MY_Controller extends CI_Controller
      * @param mixed $data
      * @return
      */
-    protected function setInfo($data)
-    {
+    protected function setInfo($data) {
         $this->title = $data['title'];
         $this->mainContent = $data['mainContent'];
     }
@@ -105,121 +93,16 @@ abstract class MY_Controller extends CI_Controller
         $this->topNav[$title]['items'][$element] = $item;
     }
 
-    /**
-     * MY_Controller::getNavItemSize()
-     *
-     * @param mixed $title
-     * @return
-     */
-    protected function getNavItemSize($title)
-    {
-        return sizeof($this->topNav[$title]['items']);
+    protected function redirectIfNotLoggedIn($dest = '/user/login') {
+      if(!$this->user->isLoggedIn()) redirect($dest, 'refresh');
     }
 
-    /**
-     * MY_Controller::CheckLogin()
-     *
-     * @return
-     */
-    protected function CheckLogin()
-    {
-        if($this->loginRequired)
-        {
-            if($this->session->userdata('user') != null)
-            {
-                $temp = $this->session->userdata('user');
-                if($temp['true'] !== true) redirect('/user/login', 'refresh');
-            }
-            else
-            {
-                redirect('/user/login', 'refresh');
-            }
-        }
+    public function Log($data) {
+      $this->model->logData($data,get_class($this));
     }
 
-    protected function isLoggedin()
-    {
-        if($this->session->userdata('user') != null)
-        {
-            $temp = $this->session->userdata('user');
-            return $temp['true'];
-        }
-        else
-            return false;
-    }
-
-    protected function getUserId()
-    {
-        if($this->isLoggedin())
-        {
-            $temp = $this->session->userdata('user');
-            return $temp['id'];
-        }
-        else
-            return null;
-    }
-
-    /**
-     * MY_Controller::Log()
-     *
-     * @param mixed $data
-     * @param bool $error
-     * @return
-     */
-    public function Log($data)
-    {
-        $this->model->logData($data,get_class($this));
-    }
-
-    /**
-     * MY_Controller::Setup()
-     *
-     * @param mixed $modelName
-     * @return
-     */
-    protected function Setup($modelName)
-    {
-        $this->load->model($modelName, 'model');
-    }
-
-    /**
-     * MY_Controller::getSessionUserData()
-     *
-     * @return
-     */
-    protected function getSessionUserData()
-    {
-        return $this->session->userdata('user');
-    }
-
-    protected function getUserLevel()
-    {
-        $data = $this->getSessionUserData();
-        return $data['type'];
-    }
-
-    /**
-     * MY_Controller::setUserData()
-     *
-     * @param mixed $userData
-     * @return
-     */
-    protected function setUserData($userData)
-    {
-        $temp['email'] = $userData[0]['email'];
-        $temp['firstName'] = $userData[0]['firstName'];
-        $temp['lastName'] = $userData[0]['lastName'];
-        $temp['type'] = $userData[0]['userType'];
-        $temp['id'] = $userData[0]['id'];
-        $temp['locations'] = $this->getUserLocations($userData[0]['id']);
-        $temp['true'] = true;
-        $this->session->set_userdata('user', $temp);
-    }
-
-    private function getUserLocations($user)
-    {
-        $where['user'] = $user;
-        return $this->model->GetTable('userlocation',$where);
+    protected function Setup($modelName) {
+      $this->load->model($modelName, 'model');
     }
 
     /**
@@ -313,24 +196,8 @@ abstract class MY_Controller extends CI_Controller
         return (get_resource_type($attach) == 'file' || get_resource_type($attach) == 'stream');
     }
 
-    public function datediffInWeeks($date1, $date2)
-    {
-        $first = date_create_from_format('d/m/Y', $date1);
-        $second = date_create_from_format('d/m/Y', $date2);
-
-        if($date1 > $date2)
-            return $this->datediffInWeeks($date2, $date1);
-        else
-            return floor($first->diff($second)->days/7);
-    }
-
-    /**
-     * MY_Controller::mainNav()
-     *
-     * @return
-     */
     private function mainNav($userType) {
-        if($this->isLoggedin()) {
+        if($this->user->isLoggedin()) {
             $this->profileNav($userType);
             $this->mentorNav($userType);
             $this->adminNav($userType);

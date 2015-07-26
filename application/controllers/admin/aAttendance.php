@@ -33,30 +33,16 @@ class Aattendance extends MY_Controller
     }
 
 
-    private function setLabs()
-    {
-
-        $this->loginRequired = true;
-
-        $this->CheckLogin();
-
-
-        $user = $this->session->userdata('user');
-
+    private function setLabs() {
+        $this->redirectIfNotLoggedIn();
         $loc = array();
-
-
-        if ($user['type'] == '4')
-        {
-
-            foreach ($user['locations'] as $location)
-                $loc[]['id'] = $location['location'];
-
+        $type = $this->user->getType();
+        if ($type == '4') {
+          foreach ($user['locations'] as $location) {
+            $loc[]['id'] = $location['location'];
+          }
         }
-
-
-        if ($user['type'] == '5')
-            $loc = $this->model->getLocationId();
+        if ($type == '5') $loc = $this->model->getLocationId();
 
 
         for ($cnt = 0; $cnt < count($loc); $cnt++)
@@ -111,7 +97,7 @@ class Aattendance extends MY_Controller
 
         $labTerms[]['desc'] = $t['startDate'] ." - " . $t['endDate'];
 
-        $labTerms[]['id'] = $t['id']; 
+        $labTerms[]['id'] = $t['id'];
 
         }*/
 
@@ -145,25 +131,11 @@ class Aattendance extends MY_Controller
     }
 
 
-    public function index()
-    {
-
-        $this->preRender();
-
+    public function index() {
+      $this->redirectIfNotLoggedIn();
+      $this->render();
     }
 
-
-    private function preRender()
-    {
-
-        $this->loginRequired = true;
-
-        $this->CheckLogin();
-
-        $this->render();
-
-    }
-    
     public function getLocationData()
     {
         $data['location'] = (int)$this->input->get('location');

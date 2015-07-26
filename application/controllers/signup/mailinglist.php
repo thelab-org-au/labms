@@ -2,17 +2,17 @@
 
 require_once APPPATH.'controllers/signup/basesignup.php';
 
-class Mailinglist extends Basesignup 
+class Mailinglist extends Basesignup
 {
 
     function __construct()
     {
         parent::__construct();
         $this->load->model('signup/mailinglistmodel','model');
-        $this->data['labs'] = $this->model->GetAllLabs(); 
+        $this->data['labs'] = $this->model->GetAllLabs();
         $this->mainContent = 'forms/maillist';
         $this->title = 'Mailing list';
-        $this->baseSeg = 3;    
+        $this->baseSeg = 3;
     }
 
 	public function index()
@@ -25,14 +25,12 @@ class Mailinglist extends Basesignup
         {
             $func = $this->uri->segment($this->baseSeg);
             $this->$func();
-        } 
+        }
 	}
-    
+
     private function preRender()
     {
-        $this->loginRequired = false;
-        $this->CheckLogin();
-    	$this->render();         
+    	$this->render();
     }
 
     public function confirm()
@@ -45,20 +43,20 @@ class Mailinglist extends Basesignup
     public function signup()
     {
         $returnData = $this->createBaseUser();
-        
+
         if($returnData !== false)
-        {   
-            
+        {
+
             $locationId = $returnData['location'];
-            $this->addToMaillist($returnData['id'],$locationId);           
-            
+            $this->addToMaillist($returnData['id'],$locationId);
+
             $this->confirmSignup($returnData,'/signup/mailinglist/confirm','emailTemplate/maillistconfirmation');
             /*
             if(!$this->isLoggedin())
                 $this->sendConfirmation('/signup/mailinglist/confirm','emailTemplate/maillistconfirmation',$returnData);
-            
 
-            
+
+
             if(!$this->isLoggedin())
                 $this->session->set_userdata('ok', 'Sign up completed.<br/>An email has been sent to ' .$returnData['email'] . '.<br/>Please click the link in the email to confirm your details' );
             else
@@ -67,14 +65,14 @@ class Mailinglist extends Basesignup
            if(!$this->isLoggedin())
            {
                 $this->mainContent = 'confirmations/maillist';
-                $this->preRender();           
+                $this->preRender();
            }
            else
-                redirect(site_url().'/user/profile', 'refresh');     
-    
+                redirect(site_url().'/user/profile', 'refresh');
+
         }
         else
-            $this->preRender();       
+            $this->preRender();
     }
 
     private function addToMaillist($user,$location)

@@ -2,7 +2,7 @@
 
 require_once APPPATH.'controllers/admin/admin.php';
 
-class Mailout extends MY_Controller 
+class Mailout extends MY_Controller
 {
     function __construct()
     {
@@ -12,7 +12,7 @@ class Mailout extends MY_Controller
         $this->title = 'Mailout';
         $this->baseSeg = 2;
     }
-    
+
 	public function index()
 	{
         /* if ($this->uri->segment($this->baseSeg) === FALSE)
@@ -31,7 +31,7 @@ class Mailout extends MY_Controller
 
             $this->$func();
 
-        } 
+        }
 
         */
         $this->preRender();
@@ -50,15 +50,15 @@ class Mailout extends MY_Controller
         {
             foreach($this->model->getUserLocations() as $location)
                 $temp2[] = $this->model->getLocations($location['location']);
-        
+
             $this->data['locations'] = $temp2;
-        }  
-           
+        }
+
         foreach($temp['locations'] as $loc)
             $this->data['userLocations'][] = $loc['location'];
 
         $this->data['users'] = $this->model->getAllUsers($temp['type']);
-        
+
         for($cnt = 0; $cnt < count($this->data['users']); $cnt++)
         {
             $temp = $this->model->getUserLocationsById($this->data['users'][$cnt]['id']);
@@ -72,36 +72,34 @@ class Mailout extends MY_Controller
         }
     }
 
-    private function preRender()
-    {
-        $this->init();
-        $this->loginRequired = true;
-        $this->CheckLogin();
-    	$this->render();         
+    private function preRender() {
+      $this->init();
+      $this->redirectIfNotLoggedIn();
+      $this->render();
     }
 
     public function sendMailout()
     {
-        
+
         if(!$this->validate())
         {
-            echo validation_errors(); 
-            return;    
+            echo validation_errors();
+            return;
         }
-        
+
         $data['date'] = date("d-m-Y");
         $data['desc'] = $this->input->post('mailoutDesc',true);
         $data['content'] = $this->input->post('mailoutContent');
         $this->model->storeMailout($data);
-      
+
         $users = array();
-        
+
         $ids = explode(',',$this->input->post('ids'));
-        
+
         foreach($ids as $user)
         {
             if($user != '')
-                $users[] = $this->model->getUserEmail($user); 
+                $users[] = $this->model->getUserEmail($user);
         }
 
         $labs = explode(',',$this->input->post('labs'));
@@ -121,25 +119,25 @@ class Mailout extends MY_Controller
             if(count($temp2) > 0)
             {
                 foreach($temp2 as $user)
-                    $users[] = $this->model->getUserEmail($user); 
+                    $users[] = $this->model->getUserEmail($user);
             }
         }
-        
+
         foreach($this->input->post() as $key => $value)
         {
             if (strpos($key,'user') !== false)
                 $users[] = $this->model->getUserEmail($value);
         }
-        
+
         if(count($users) == 0)
         {
            echo 'No recipients selected';
-           return; 
+           return;
         }
-            
+
         $data['email'] = 'craig@oztron.com';
         $view = $this->load->view('mailout/mailoutTemplate.php',$data,true);
-        
+
         $errors = array();
         foreach($users as $email)
         {
@@ -150,32 +148,32 @@ class Mailout extends MY_Controller
                 $errors[] = $email;
             }
         }
-        
+
         //$this->SendEmail($data['desc'],$view,'craig@oztron.com');
     }
-    
+
     protected function validate()
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('mailoutDesc', 'Description', 'trim|required|xss_clean');
         $this->form_validation->set_rules('mailoutContent', 'Mailout content', 'trim|required|xss_clean');
-        
-        return $this->form_validation->run();        
+
+        return $this->form_validation->run();
     }
-    
+
     public function getUsers()
     {
         //echo $this->input->get('ids');
         $ids = explode(",", $this->input->get('ids'));
-        
+
         $all = $this->input->get('all');
-        
+
         if(count($ids) == 0 && $all == null)
         {
             echo '';
             return;
         }
-        
+
         if($all != null)
         {
             $this->init();
@@ -183,18 +181,18 @@ class Mailout extends MY_Controller
             echo $view;
             return;
         }
-            
+
         $temp = $this->session->userdata('user');
-        
+
         $data['users'] = $this->model->getUsersByLocation($ids,$temp['type']);
-        
+
 
         if( $data['users'] == null)
         {
             echo '';
             return;
         }
-            
+
         //var_dump($ids);
         //return;
          for($cnt = 0; $cnt < count($data['users']); $cnt++)
@@ -207,24 +205,24 @@ class Mailout extends MY_Controller
 
             $t = substr($t, 0, -1);
            $data['users'][$cnt]['locations'] = $t;
-        }  
-        
-        //var_dump($data);     
+        }
+
+        //var_dump($data);
         $view = $this->load->view('mailout/users',$data,true);
         echo $view;
     }
-    
+
     public function preview()
     {
         $data['desc'] = $this->input->post('mailoutDesc',true);
-        $data['content'] = $this->input->post('mailoutContent'); 
-        echo $this->load->view('mailout/mailoutTemplate.php',$data,true);       
+        $data['content'] = $this->input->post('mailoutContent');
+        echo $this->load->view('mailout/mailoutTemplate.php',$data,true);
     }
-    
+
     public function unsubscribe()
     {
         $id = $this->model->getUserLocationsByEmail($this->input->get('id'));
-        
+
         $data['output'] = '<form action="'.site_url().'/mailout/confirm" method="post">
                             <input type="hidden" name="id" value="'.$id.'" />
                     <table>
@@ -243,10 +241,10 @@ class Mailout extends MY_Controller
                     </tr>
                     </table>
 				</form>';
-        
+
         $this->load->view('mailout/unsubscribe',$data);
     }
-    
+
     public function confirm()
     {
         $data['output'] = '<table style="width:100%; text-align: center;"><tr><td>You have been unsubscribed <br/>Thank you.</td></tr></table>';
