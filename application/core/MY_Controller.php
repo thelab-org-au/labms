@@ -241,12 +241,12 @@ abstract class MY_Controller extends CI_Controller {
           'title' => 'My details',
           'home' => true,
           'items' => array(
-              array('title' => 'My information', 'link' => site_url('user/profile/loadPage?page=user'), 'class' => 'report'),
-              array('title' => 'Child information', 'link' => site_url('user/profile/loadPage?page=child'), 'class' => 'report'),
-              array('title' => 'Waiting lists', 'link' => site_url('user/profile/loadPage?page=waiting'), 'class' => 'report'),
-              array('title' => 'Mailing lists', 'link' => site_url('user/profile/loadPage?page=mail'), 'class' => 'report'),
-              array('title' => 'Payment', 'link' => site_url('user/profile/loadPage?page=payment'), 'class' => 'report'),
-              array('title' => 'Mentor', 'link' => site_url('user/profile/loadPage?page=mentor'), 'class' => 'report'),
+              array('title' => 'My information', 'link' => site_url('user/profile'), 'class' => 'report'),
+              array('title' => 'Child information', 'link' => site_url('user/profile/child'), 'class' => 'report'),
+              array('title' => 'Waiting lists', 'link' => site_url('user/profile/waiting'), 'class' => 'report'),
+              array('title' => 'Mailing lists', 'link' => site_url('user/profile/mail'), 'class' => 'report'),
+              array('title' => 'Payment', 'link' => site_url('user/profile/payment'), 'class' => 'report'),
+              array('title' => 'Mentor', 'link' => site_url('user/profile/mentor'), 'class' => 'report'),
           ),
        ));
     }
