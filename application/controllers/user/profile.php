@@ -2,20 +2,20 @@
 
 //require_once APPPATH.'controllers/signup/basesignup.php';
 
-class Profile extends MY_Controller 
+class Profile extends MY_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('profile_model','model');
+        $this->load->model('profile_model', 'model');
         $this->mainContent = 'profile/profile';
         $this->title = 'Profile';
         
-        $this->baseSeg = 3; 
+        $this->baseSeg = 3;
     }
-    
-	public function index()
-	{
+
+  	public function index()
+  	{
 
         if ($this->uri->segment($this->baseSeg) === FALSE)
         {
@@ -27,17 +27,17 @@ class Profile extends MY_Controller
             $func = $this->uri->segment($this->baseSeg);
             $this->$func();
         }
-	}
-    
+  	}
+
     private function init()
     {
         $id = $this->getUserId();
-        
+
         if($this->data['page'] == 'profile/userInfo')
         {
             $userData = $this->model->getUserData($id);
             $this->data['userType'] = $userData[0]['userType'];
-            $this->data['userData'] = $userData[0];            
+            $this->data['userData'] = $userData[0];
         }
         else if($this->data['page'] == 'profile/childInfo')
         {
@@ -58,25 +58,25 @@ class Profile extends MY_Controller
             if(count($this->data['mentorData']) > 0)
             {
                 $this->data['mentorData'] = $this->data['mentorData'][0];
-                
-                
+
+
                 foreach($this->model->getMentorExp($this->data['mentorData']['id']) as $exp)
                     $this->data['mentorData']['exp'][$exp['tech']] = $exp['level'];
-                    
-                    
+
+
             }
         }
         else if($this->data['page'] == 'profile/paymentInfo')
         {
-            
+
         }
-        
-        
-        $this->data['mentor'] = false;     
+
+
+        $this->data['mentor'] = false;
         $this->data['parent'] = true;
-        
+
     }
-    
+
    /* private function getWaitListData($id)
     {
         
@@ -85,46 +85,46 @@ class Profile extends MY_Controller
     private function getStudentData($id)
     {
         $this->data['studentData'] = $this->model->getStudentData($id);
-        
+
         $this->data['parent'] = false;
         for($cnt = 0; $cnt < count ($this->data['studentData']); $cnt++)
         {
             $temp = array();
             $temp = $this->model->getStudentSchool($this->data['studentData'][$cnt]['studentData']);
-            
+
             foreach($temp as $t)
                 $this->data['studentData'][$cnt]['schoolData'][] = $t['schoolLevel'];
-                
-                
+
+
             $temp = $this->model->getStudentCondition($this->data['studentData'][$cnt]['studentData']);
             foreach($temp as $t)
                 $this->data['studentData'][$cnt]['conditionData'][] = $t['condition'];
-                
-                
+
+
             $temp = $this->model->getStudentExperience($this->data['studentData'][$cnt]['studentData']);
-            
+
             foreach($temp as $t)
                 $this->data['studentData'][$cnt]['studentExp'][$t['tech']] = $t['level'];
-                
+
             $temp = $this->model->getStudentInterest($this->data['studentData'][$cnt]['studentData']);
-            
+
             foreach($temp as $t)
-                $this->data['studentData'][$cnt]['studentInterest'][$t['tech']] = $t['level'];  
-                
-            $this->data['parent'] = true;   
+                $this->data['studentData'][$cnt]['studentInterest'][$t['tech']] = $t['level'];
+
+            $this->data['parent'] = true;
         }
-        
-        
+
+
     }
-    
+
     private function preRender()
     {
-	    $this->loginRequired = true;
+  	    $this->loginRequired = true;
         $this->CheckLogin();
-        $this->init(); 
-		$this->render();         
+        $this->init();
+    		$this->render();
     }
-    
+
     public function loadPage($page = null)
     {
         if($page == null)
@@ -152,12 +152,12 @@ class Profile extends MY_Controller
                 break;
             default:
                 $this->data['page'] = 'profile/userInfo';
-                break;   
+                break;
         }
 
-        $this->preRender();   
+        $this->preRender();
     }
-    
+
     public function updateUser()
     {
         $id = (int)$this->input->post('userId');
@@ -168,40 +168,40 @@ class Profile extends MY_Controller
         $data['address'] = $this->input->post('address',true);
         $data['suburb'] = $this->input->post('suburb',true);
         $data['postcode'] = $this->input->post('postcode',true);
-        
+
         $pass = $this->input->post('pass',true);
         $passCon = $this->input->post('passCon',true);
-        
+
         if($pass != '' && $pass == $passCon)
         {
             $this->load->library('encrypt');
             $data['password'] =  $this->encrypt->encode($pass);
         }
-        
+
         if($this->model->updateUser($id,$data) == 1)
         {
             $this->session->set_userdata('ok', 'Your information has been updated' );
         }
         else
             $this->data['error'] = 'An error has occured your information has not been updated';
-            
+
         $this->data['page'] = 'profile/userInfo';
         $this->preRender();
     }
-    
+
     public function studentUpdate()
     {
         return;
         $id = (int)$this->input->post('id',true);
         $studentDataId = (int)$this->input->post('studentData',true);
-        
+
         $data = array(
             'name' => $this->input->post('name',true),
             'dob' => $this->input->post('age',true)
         );
-        
+
         $this->model->updateTable($id,$data,'student');
-        
+
         $data = array(
             'daysAtSchool' => $this->input->post('days',true),
             'schoolOther' => $this->input->post('otherText',true),
@@ -210,22 +210,22 @@ class Profile extends MY_Controller
             'sessionType' => $this->input->post('socialInterest',true),
             'otherInfo' => $this->input->post('text',true),
             'sessionOther' => $this->input->post('otherintrestText',true)
-        );  
-        
-        $this->model->updateTable($studentDataId,$data,'studentdata');      
-        
+        );
+
+        $this->model->updateTable($studentDataId,$data,'studentdata');
+
         $this->model->deleteTable('studentschool',$studentDataId);
         foreach($this->input->post('school') as $school)
             $this->model->addStudentSchool(array('studentData' => $studentDataId, 'schoolLevel' => $school));
 
-        
+
         $this->model->deleteTable('studentconditions',$studentDataId);
         foreach($this->input->post('conditions') as $condition)
-            $this->model->addStudentCondition(array('studentData' => $studentDataId, 'condition' => $condition)); 
-            
-        $this->model->deleteTable('studentintrest',$studentDataId); 
-        $this->model->deleteTable('studentexperience',$studentDataId); 
-        
+            $this->model->addStudentCondition(array('studentData' => $studentDataId, 'condition' => $condition));
+
+        $this->model->deleteTable('studentintrest',$studentDataId);
+        $this->model->deleteTable('studentexperience',$studentDataId);
+
         foreach($this->input->post() as $key => $value)
         {
             if(strpos($key, 'intrest') === 0)
@@ -244,13 +244,13 @@ class Profile extends MY_Controller
                                                     'studentData' => $studentDataId,
                                                     'tech' => substr($key,3),
                                                     'level' => $value)
-                                                );                
+                                                );
             }
-        }  
-        
+        }
+
         $this->loadPage('child');
     }
-    
+
     public function mailRemove()
     {
         $id = (int)$this->input->get('id',true);
@@ -258,11 +258,11 @@ class Profile extends MY_Controller
         $this->data['page'] = 'profile/mailout';
         $this->preRender();
     }
-    
+
     public function mentorUpdate()
     {
         $id = (int)$this->input->post('id',true);
-        
+
         $data = array
         (
             'education' => $this->input->post('education',true),
@@ -276,26 +276,26 @@ class Profile extends MY_Controller
             'contactEmployer' => $this->input->post('contactEmployer',true),
             'addInfo' => $this->input->post('addInfo',true),
         );
-        
+
         if (!empty($_FILES['userfile']['name']))
         {
             $currentFile = $this->input->post('currentFile',true);
-            
+
             if(file_exists('uploads/'.$currentFile))
                 unlink('uploads/'.$currentFile);
-            
+
             $path = $_FILES['userfile']['name'];
             $succsess = $this->do_upload($id);
-            
+
             $fileData = $this->upload->data();
             $data['origFileName'] = $fileData['client_name'];
             $data['fileName'] = $fileData['orig_name'];
         }
-        
+
         $this->model->updateTable($id,$data,'mentor');
-        
-        $this->model->deleteMentorTable('mentorexperience',$id); 
-        
+
+        $this->model->deleteMentorTable('mentorexperience',$id);
+
         foreach($this->input->post() as $key => $value)
         {
             if(strpos($key, 'Tech') === 0)
@@ -306,8 +306,8 @@ class Profile extends MY_Controller
                                                     'tech' => substr($key,4),
                                                     'level' => $value)
                                                 );
-            }               
-        }        
+            }
+        }
 
         $this->data['page'] = 'profile/mentorInfo';
         $this->preRender();

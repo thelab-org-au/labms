@@ -2,8 +2,8 @@
 
 /**
  * MY_Controller
- * 
- * @package   
+ *
+ * @package
  * @author Lab admin
  * @copyright craig poole
  * @version 2013
@@ -23,7 +23,7 @@ abstract class MY_Controller extends CI_Controller
     protected $emailError = '';
     /**
      * MY_Controller::__construct()
-     * 
+     *
      * @param mixed $modelName
      * @param mixed $t
      * @param mixed $mc
@@ -44,16 +44,16 @@ abstract class MY_Controller extends CI_Controller
         if($modelName != null)
             $this->Setup($modelName);
             
-        $this->data['loggedin'] = $this->isLoggedin();  
+        $this->data['loggedin'] = $this->isLoggedin();
         
 
         //$this->addMainNav();    
     }
-    
+
     /**
      * MY_Controller::ConfigEmail()
-     * 
-     * @return      
+     *
+     * @return
      */
     protected function ConfigEmail()
     {
@@ -62,12 +62,12 @@ abstract class MY_Controller extends CI_Controller
         $this->config->set_item('smtp_port', 465);
         $this->config->set_item('smtp_user', 'no-reply@thelab.org.au');
         $this->config->set_item('smtp_pass', '@1Admin1@');
-        $this->config->set_item('default_from', 'no-reply@thelab.org.au');        
+        $this->config->set_item('default_from', 'no-reply@thelab.org.au');
     }
-    
+
     /**
      * MY_Controller::render()
-     * 
+     *
      * @return
      */
     protected function render()
@@ -75,16 +75,16 @@ abstract class MY_Controller extends CI_Controller
         $user = $this->session->userdata('user');
         $this->data['userName'] = $user['firstName'];
         $this->mainNav($user['type']);
- 	   $this->data['title'] = $this->title;
-       $this->data['mainContent'] = $this->mainContent;
-       $this->data['topNav'] = $this->topNav;
+         $this->data['title'] = $this->title;
+        $this->data['mainContent'] = $this->mainContent;
+        $this->data['topNav'] = $this->topNav;
        
-        $this->load->view($this->template,$this->data);       
+        $this->load->view($this->template,$this->data);
     }
-    
+
     /**
      * MY_Controller::setInfo()
-     * 
+     *
      * @param mixed $data
      * @return
      */
@@ -93,10 +93,10 @@ abstract class MY_Controller extends CI_Controller
         $this->title = $data['title'];
         $this->mainContent = $data['mainContent'];
     }
-    
+
     /**
      * MY_Controller::setNavItem()
-     * 
+     *
      * @param mixed $item
      * @return
      */
@@ -104,10 +104,10 @@ abstract class MY_Controller extends CI_Controller
     {
         $this->topNav[$item['title']] = $item;
     }
-    
+
     /**
      * MY_Controller::addNavItem()
-     * 
+     *
      * @param mixed $title
      * @param mixed $element
      * @param mixed $item
@@ -117,10 +117,10 @@ abstract class MY_Controller extends CI_Controller
     {
         $this->topNav[$title]['items'][$element] = $item;
     }
-    
+
     /**
      * MY_Controller::getNavItemSize()
-     * 
+     *
      * @param mixed $title
      * @return
      */
@@ -128,10 +128,10 @@ abstract class MY_Controller extends CI_Controller
     {
         return sizeof($this->topNav[$title]['items']);
     }
-    
+
     /**
      * MY_Controller::CheckLogin()
-     * 
+     *
      * @return
      */
     protected function CheckLogin()
@@ -147,9 +147,9 @@ abstract class MY_Controller extends CI_Controller
             else
                 redirect('/user/login', 'refresh');
                 
-        }       
+        }
     }
-    
+
     protected function isLoggedin()
     {
         if($this->session->userdata('user') != null)
@@ -158,9 +158,9 @@ abstract class MY_Controller extends CI_Controller
             return $temp['true'];
         }
         else
-            return false;        
+            return false;
     }
-    
+
     protected function getUserId()
     {
         if($this->isLoggedin())
@@ -169,24 +169,24 @@ abstract class MY_Controller extends CI_Controller
             return $temp['id'];
         }
         else
-            return null;         
+            return null;
     }
-    
+
     /**
      * MY_Controller::Log()
-     * 
+     *
      * @param mixed $data
      * @param bool $error
      * @return
      */
     public function Log($data)
-    {     
+    {
         $this->model->logData($data,get_class($this));
     }
-    
+
     /**
      * MY_Controller::Setup()
-     * 
+     *
      * @param mixed $modelName
      * @return
      */
@@ -194,26 +194,26 @@ abstract class MY_Controller extends CI_Controller
     {
         $this->load->model($modelName, 'model');
     }
-    
+
     /**
      * MY_Controller::getSessionUserData()
-     * 
+     *
      * @return
      */
     protected function getSessionUserData()
     {
         return $this->session->userdata('user');
     }
-    
+
     protected function getUserLevel()
     {
         $data = $this->getSessionUserData();
         return $data['type'];
     }
-    
+
     /**
      * MY_Controller::setUserData()
-     * 
+     *
      * @param mixed $userData
      * @return
      */
@@ -221,25 +221,25 @@ abstract class MY_Controller extends CI_Controller
     {
         
         $temp['email'] = $userData[0]['email'];
-        $temp['firstName'] = $userData[0]['firstName']; 
-        $temp['lastName'] = $userData[0]['lastName']; 
+        $temp['firstName'] = $userData[0]['firstName'];
+        $temp['lastName'] = $userData[0]['lastName'];
         $temp['type'] = $userData[0]['userType'];
         $temp['id'] = $userData[0]['id'];
         $temp['locations'] = $this->getUserLocations($userData[0]['id']);
-        $temp['true'] = true;  
+        $temp['true'] = true;
         
-        $this->session->set_userdata('user', $temp);        
+        $this->session->set_userdata('user', $temp);
     }
-    
+
     private function getUserLocations($user)
     {
         $where['user'] = $user;
         return $this->model->GetTable('userlocation',$where);
     }
-    
+
     /**
      * MY_Controller::SendEmail()
-     * 
+     *
      * @param mixed $subject
      * @param mixed $message
      * @param mixed $to
@@ -254,12 +254,12 @@ abstract class MY_Controller extends CI_Controller
         $config = Array(
 
             'protocol' => 'sendmail',
-            'mailtype'  => 'html', 
+            'mailtype'  => 'html',
             'charset'   => 'iso-8859-1',
-            
+
         );
         */
-        
+
         $config = Array(
 
             'protocol' => 'smtp',
@@ -268,28 +268,28 @@ abstract class MY_Controller extends CI_Controller
             'smtp_user' => 'no-reply@thelab.org.au',
             'smtp_pass' => '@1Admin1@',
             'smtp_timeout' => 10,
-            'mailtype'  => 'html', 
+            'mailtype'  => 'html',
             'charset'   => 'iso-8859-1',
-            
+
         );
-        
-        
-        
+
+
+
         if($from == '')
             $from = $this->config->item('default_from');
-        
+
         $this->load->library('email');
-        $this->email->initialize($config);   
+        $this->email->initialize($config);
         $this->email->set_mailtype("html");
-        
+
         if($replyto != null)
             $this->email->reply_to($replyto);
-        
+
         $this->email->from($from);
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
-        
+
         if($cc != null)
         {
             if(is_array($cc))
@@ -300,26 +300,26 @@ abstract class MY_Controller extends CI_Controller
             else
                 $this->email->cc($cc);
         }
-        
+
         if($attach != null)
         {
             if(file_exists($attach) || $this->IsFile($attach))
                 $this->email->attach($attach);
         }
 
-        //return (!$this->email->send()) ?  $this->email->print_debugger() : true;     
+        //return (!$this->email->send()) ?  $this->email->print_debugger() : true;
         if($this->email->send())
             return true;
         else
         {
             $this->emailError = $this->email->print_debugger();
             return false;
-        }   
+        }
     }
-    
+
     /**
      * MY_Controller::IsFile()
-     * 
+     *
      * @param mixed $attach
      * @return
      */
@@ -327,21 +327,21 @@ abstract class MY_Controller extends CI_Controller
     {
         return (get_resource_type($attach) == 'file' || get_resource_type($attach) == 'stream');
     }
-    
+
     public function datediffInWeeks($date1, $date2)
     {
         $first = date_create_from_format('d/m/Y', $date1);
         $second = date_create_from_format('d/m/Y', $date2);
-        
-        if($date1 > $date2) 
+
+        if($date1 > $date2)
             return $this->datediffInWeeks($date2, $date1);
         else
             return floor($first->diff($second)->days/7);
     }
-    
+
     /**
      * MY_Controller::mainNav()
-     * 
+     *
      * @return
      */
     protected function mainNav($userType)
@@ -387,29 +387,29 @@ abstract class MY_Controller extends CI_Controller
        
         if($this->isLoggedin())
         {
-            $this->profileNav($userType);     
-            
-            $this->mentorNav($userType);
-           $this->adminNav($userType);
-       }
-              
+          $this->profileNav($userType);
+
+          $this->mentorNav($userType);
+          $this->adminNav($userType);
+        }
+
     }
-    
+
     private function mentorNav($userType)
     {
         if($userType == 1 || $userType == 3)
         return;
-	   $temp = array();
-       $temp['link'] = site_url().'/user/profile';
-       $temp['title'] = 'Mentor';
-       $temp['home'] = true;
-       $temp['items'] = array();    
+        $temp = array();
+        $temp['link'] = site_url().'/user/profile';
+        $temp['title'] = 'Mentor';
+        $temp['home'] = true;
+        $temp['items'] = array();
        
         $temp['items'][] = array('title' => 'Attendance','link' => site_url().'/attendance', 'class' => 'users');
 
-        $temp['items'][] = array('title' => 'Training','link' => site_url().'/training', 'class' => 'page');   
+        $temp['items'][] = array('title' => 'Training','link' => site_url().'/training', 'class' => 'page');
         
-        $this->setNavItem($temp); 
+        $this->setNavItem($temp);
     }
 
     private function adminNav($userType)
@@ -418,27 +418,27 @@ abstract class MY_Controller extends CI_Controller
         if($userType < 4)
             return;
          
- 	   $temp = array();
+        $temp = array();
        $temp['link'] = site_url().'/admin/admin';
-       $temp['title'] = 'Admin';
-       $temp['home'] = true;
-       $temp['items'] = array();
+        $temp['title'] = 'Admin';
+        $temp['home'] = true;
+        $temp['items'] = array();
        
         //$temp['items'][] = array('title' => 'Admin main','link' => site_url().'/admin/admin', 'class' => 'report');
         $temp['items'][] = array('title' => 'Locations','link' => site_url().'/admin/alocations', 'class' => 'report');
         $temp['items'][] = array('title' => 'Sessions','link' => site_url().'/admin/asessions', 'class' => 'report');
         $temp['items'][] = array('title' => 'Students','link' => site_url().'/admin/astudents', 'class' => 'report');
         $temp['items'][] = array('title' => 'Mentors','link' => site_url().'/admin/amentors', 'class' => 'report');
-        $temp['items'][] = array('title' => 'Users','link' => site_url().'/admin/ausers', 'class' => 'report'); 
-        $temp['items'][] = array('title' => 'Training','link' => site_url().'/training/maintenance', 'class' => 'report'); 
-        $temp['items'][] = array('title' => 'Mailout','link' => site_url().'/mailout', 'class' => 'report');  
+        $temp['items'][] = array('title' => 'Users','link' => site_url().'/admin/ausers', 'class' => 'report');
+        $temp['items'][] = array('title' => 'Training','link' => site_url().'/training/maintenance', 'class' => 'report');
+        $temp['items'][] = array('title' => 'Mailout','link' => site_url().'/mailout', 'class' => 'report');
         //$temp['items'][] = array('title' => 'Waitlist','link' => site_url().'/waitlist', 'class' => 'report');
-        $temp['items'][] = array('title' => 'Session cost','link' => site_url().'/admin/cost', 'class' => 'report');  
-        $temp['items'][] = array('title' => 'Attendance','link' => site_url().'/admin/aAttendance', 'class' => 'report');    
+        $temp['items'][] = array('title' => 'Session cost','link' => site_url().'/admin/cost', 'class' => 'report');
+        $temp['items'][] = array('title' => 'Attendance','link' => site_url().'/admin/aAttendance', 'class' => 'report');
        
-       $this->setNavItem($temp);        
+        $this->setNavItem($temp);
     }
-    
+
     private function profileNav($userType)
     {
 
@@ -459,29 +459,29 @@ abstract class MY_Controller extends CI_Controller
        
        $this->setNavItem($temp);        
     }
-    
-	protected function do_upload($fileName)
-	{
-		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'pdf|doc|docx|txt|odt';
+
+    protected function do_upload($fileName)
+    {
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'pdf|doc|docx|txt|odt';
         $config['file_name'] = $fileName;
-		$config['max_size']	= '2048';
-        $config['max_filename']	= '30';
+        $config['max_size']  = '2048';
+        $config['max_filename']  = '30';
         $config['remove_spaces'] = true;
 
 
-		$this->load->library('upload', $config);
+        $this->load->library('upload', $config);
 
-		if (!$this->upload->do_upload())
-		{
+        if (!$this->upload->do_upload())
+        {
             return $this->upload->display_errors();
-		}
-		else
-		{
+        }
+        else
+        {
             return true;
-		}
-	}    
-    
+        }
+    }
+
     /*
     private function addMainNav()
     {

@@ -10,7 +10,7 @@
     ?>
     <?php //echo validation_errors(); ?>
 
-    <?php if($mentor) : ?>
+    <?php if($mentor): ?>
 
 	<?php echo form_open_multipart('user/profile/mentorUpdate',array('id' => 'parentForm')); ?>
         <input type="hidden" name="id" value="<?php echo $mentorData['id']; ?>" />
@@ -45,64 +45,64 @@
             <textarea id="crimeDetails" name="crimeDetails" rows="8" style="width: 98%;" ><?php echo $mentorData['convictionDetails']; ?></textarea>
         </div>
 
+          <div class="element">
+
+              <h3>Do you have a Working with Children Check? <span class="red"> *</span><span id="workChildVal" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span> </h3>
+              <br />
+              <ul style="list-style: none; ">
+                  <li>
+                      <label for="workChild" >
+                          <?php $check = ($mentorData['childrenCheck'] == '1') ? 'checked="checked"': ''; ?>
+                          <input type="radio" name="workChild" value="1" <?php echo $check; ?>  />&nbsp;Yes
+                      </label>
+                  </li>
+                  <li>
+                      <label for="workChild" >
+                          <?php $check = ($mentorData['childrenCheck'] == '1') ? 'checked="checked"': ''; ?>
+                          <input type="radio" name="workChild" value="2" <?php echo $check; ?>   />&nbsp;No
+                      </label>
+                  </li>
+              </ul>
+
+              <br />
+              <h3>Working with Children</h3>
+              <p>Do you have any experience working with children? Please describe.</p>
+              <br />
+              <textarea name="childExperience" rows="8" style="width: 98%;" ><?php echo $mentorData['workingWithChild']; ?></textarea>
+          </div>
+
         <div class="element">
+            <h3>Technical skills and experience ?<span class="red"> *</span><span id="expTechval" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></h3>
+            <p>Please indicate the level of expertise you have with the following technologies.</p>
+            <table style="text-align: center; width: 75%;">
+                <tr>
+                    <td></td>
+                    <td>Low</td>
+                    <td>Medium</td>
+                    <td>High</td>
+                </tr>
 
-             <h3>Do you have a Working with Children Check? <span class="red"> *</span><span id="workChildVal" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span> </h3>
-            <br />
-            <ul style="list-style: none; ">
-                <li>
-                    <label for="workChild" >
-                        <?php $check = ($mentorData['childrenCheck'] == '1') ? 'checked="checked"': ''; ?>
-                        <input type="radio" name="workChild" value="1" <?php echo $check; ?>  />&nbsp;Yes
-                    </label>
-                </li>
-                <li>
-                    <label for="workChild" >
-                        <?php $check = ($mentorData['childrenCheck'] == '1') ? 'checked="checked"': ''; ?>
-                        <input type="radio" name="workChild" value="2" <?php echo $check; ?>   />&nbsp;No
-                    </label>
-                </li>
-            </ul>
+                <?php
 
-            <br />
-            <h3>Working with Children</h3>
-            <p>Do you have any experience working with children? Please describe.</p>
-            <br />
-            <textarea name="childExperience" rows="8" style="width: 98%;" ><?php echo $mentorData['workingWithChild']; ?></textarea>
-        </div>
-
-    <div class="element">
-        <h3>Technical skills and experience ?<span class="red"> *</span><span id="expTechval" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></h3>
-        <p>Please indicate the level of expertise you have with the following technologies.</p>
-        <table style="text-align: center; width: 75%;">
-            <tr>
-                <td></td>
-                <td>Low</td>
-                <td>Medium</td>
-                <td>High</td>
-            </tr>
-
-            <?php
-
-                foreach($techs as $tech)
-                {
-                    echo '<tr>';
-                    echo '<td>'.$tech['desc'].'</td>';
-
-                    for($cnt2 = 0; $cnt2 < 3; $cnt2++)
+                    foreach($techs as $tech)
                     {
-                        if(isset($mentorData['exp'][$tech['id']]))
-                            $check = ($mentorData['exp'][$tech['id']] == ($cnt2 + 1)) ? 'checked="checked"': '';
+                        echo '<tr>';
+                        echo '<td>'.$tech['desc'].'</td>';
 
-                        echo '<td><input type="radio" name="Tech'.$tech['id'].'" value="'. ($cnt2 + 1) .'" '.$check.' /></td>';
+                        for($cnt2 = 0; $cnt2 < 3; $cnt2++)
+                        {
+                            if(isset($mentorData['exp'][$tech['id']]))
+                                $check = ($mentorData['exp'][$tech['id']] == ($cnt2 + 1)) ? 'checked="checked"': '';
+
+                            echo '<td><input type="radio" name="Tech'.$tech['id'].'" value="'. ($cnt2 + 1) .'" '.$check.' /></td>';
+                        }
+
+
+                        echo '</tr>';
                     }
-
-
-                    echo '</tr>';
-                }
-            ?>
-        </table>
-    </div>
+                ?>
+            </table>
+        </div>
 
         <div class="element">
             <h3>Other skills</h3>
@@ -167,8 +167,8 @@
         </div>
 
         <div class="entry" style="height: 29px;">
-			<button type="submit" style="float: right;"  >Update</button>
-		</div>
+      			<button type="submit" style="float: right;"  >Update</button>
+    		</div>
     </form>
     <?php endif; ?>
 
