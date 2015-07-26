@@ -329,31 +329,12 @@ abstract class MY_Controller extends CI_Controller
      *
      * @return
      */
-    protected function mainNav($userType)
-    {
-        // $temp = array();
-        // $temp['link'] = site_url('/user/profile');
-        // $temp['title'] = 'Main';
-        // $temp['home'] = true;
-        // $temp['items'] = array();
-        //
-        //
-        // $temp['items'][] = array('title' => 'Mailing list signup','link' => site_url().'/signup/mailinglist', 'class' => 'contact');
-        // $temp['items'][] = array('title' => 'Waiting list signup','link' => site_url().'/signup/waitlist', 'class' => 'add_user');
-        //
-        // if($userType != 2)
-        // $temp['items'][] = array('title' => 'Mentor signup','link' => site_url().'/signup/mentor', 'class' => 'page');
-        //
-        // $this->setNavItem($temp);
-        //
-        if($this->isLoggedin())
-        {
-          $this->profileNav($userType);
-
-          $this->mentorNav($userType);
-          $this->adminNav($userType);
+    private function mainNav($userType) {
+        if($this->isLoggedin()) {
+            $this->profileNav($userType);
+            $this->mentorNav($userType);
+            $this->adminNav($userType);
         }
-
     }
 
     private function mentorNav($userType) {
