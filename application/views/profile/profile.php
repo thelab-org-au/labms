@@ -1,5 +1,5 @@
 <div class="full_w" >
-	<div class="h_title">Profile</div>
+	<div class="h_title">My details</div>
     <?php $this->load->view('display'); ?>
 
 

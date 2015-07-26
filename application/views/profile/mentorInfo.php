@@ -1,24 +1,30 @@
 <div id="mentorInfoDisplay" >
     <h2>Mentor</h2>
 
-    <?php //var_dump($mentorData); ?>
-    <?php
-
-        if(isset($valError))
-            echo '<div style="padding:10px; color: red;">'. $valError . '</div>';
-
-    ?>
-    <?php //echo validation_errors(); ?>
+    <?php if(isset($valError)): ?>
+       <div style="padding:10px; color: red;"><?php echo $valError ?></div>
+    <?php endif ?>
 
     <?php if($mentor): ?>
+        <?php echo form_open_multipart(
+            'user/profile/mentorUpdate',
+            array('id' => 'parentForm'),
+            array('id' => $mentorData['id'])
+        ); ?>
 
-	<?php echo form_open_multipart('user/profile/mentorUpdate',array('id' => 'parentForm')); ?>
-        <input type="hidden" name="id" value="<?php echo $mentorData['id']; ?>" />
         <div class="element">
-            <h3>Educational History <span class="red"> *</span><span id="eduVal" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></h3>
-            <p>Please list all educational history, including a list of schools attended (name + address), # of years completed, and any major/degree.</p>
+            <h3>Educational History
+                <span class="red"> *</span>
+                <span id="eduVal" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span>
+            </h3>
+            <p>
+                Please list all educational history, including a list of schools attended
+                (name + address), # of years completed, and any major/degree.
+            </p>
             <br />
-            <textarea id="education" name="education" rows="8" style="width: 98%;" required="true" ><?php echo $mentorData['education']; ?></textarea>
+            <textarea id="education" name="education" rows="8" style="width: 98%;" required="true" >
+                <?php echo $mentorData['education']; ?>
+            </textarea>
         </div>
 
         <div class="element">
@@ -39,14 +45,12 @@
                 </li>
             </ul>
 
-
             <p>If yes, explain number of conviction(s), nature of offence(s) leading to conviction(s), how recently such offence(s) was/were committed, sentence(s) imposed, and type(s) of rehabilitation.<span id="crimeDetailVal" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></p>
             <br />
             <textarea id="crimeDetails" name="crimeDetails" rows="8" style="width: 98%;" ><?php echo $mentorData['convictionDetails']; ?></textarea>
         </div>
 
           <div class="element">
-
               <h3>Do you have a Working with Children Check? <span class="red"> *</span><span id="workChildVal" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span> </h3>
               <br />
               <ul style="list-style: none; ">
@@ -111,7 +115,6 @@
             <textarea id="otherSkills" name="otherSkills" rows="8" style="width: 98%;" ><?php echo $mentorData['otherSkills']; ?></textarea>
         </div>
 
-
         <div class="element">
             <h3>References<span class="red"> *</span><span id="refval" style="display: none; color: red; font-size: 11px;">&nbsp; &nbsp;Required</span></h3>
             <p>Please list two references other than relatives or friends.</p>
@@ -169,12 +172,14 @@
         <div class="entry" style="height: 29px;">
       			<button type="submit" style="float: right;"  >Update</button>
     		</div>
-    </form>
-    <?php endif; ?>
 
-    <?php if(!$mentor) :?>
+        </form>
+    <?php else: ?>
         <h3>No mentor information found</h3>
-    <?php endif;?>
+        <p>
+          <?php echo anchor('signup/mentor', 'Mentor signup') ?>
+        </p>
+    <?php endif ?>
 </div>
 <script type="text/javascript">
     function mentorInfoClose()

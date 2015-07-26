@@ -19,8 +19,8 @@ abstract class MY_Controller extends CI_Controller
     protected $template = 'template';
     protected $topNav = array();
     protected $baseSeg = 2;
-    
     protected $emailError = '';
+
     /**
      * MY_Controller::__construct()
      *
@@ -34,20 +34,8 @@ abstract class MY_Controller extends CI_Controller
         parent::__construct();
         $this->data['error'] = null;
         $this->data['ok'] = null;
-        
-       /* $this->title = $t;
-        $this->mainContent = $mc;*/ 
-        
-        
-
-          
-        if($modelName != null)
-            $this->Setup($modelName);
-            
+        if($modelName != null) $this->Setup($modelName);
         $this->data['loggedin'] = $this->isLoggedin();
-        
-
-        //$this->addMainNav();    
     }
 
     /**
@@ -78,7 +66,6 @@ abstract class MY_Controller extends CI_Controller
          $this->data['title'] = $this->title;
         $this->data['mainContent'] = $this->mainContent;
         $this->data['topNav'] = $this->topNav;
-       
         $this->load->view($this->template,$this->data);
     }
 
@@ -141,12 +128,12 @@ abstract class MY_Controller extends CI_Controller
             if($this->session->userdata('user') != null)
             {
                 $temp = $this->session->userdata('user');
-                if($temp['true'] !== true)
-                    redirect('/user/login', 'refresh'); 
+                if($temp['true'] !== true) redirect('/user/login', 'refresh');
             }
             else
+            {
                 redirect('/user/login', 'refresh');
-                
+            }
         }
     }
 
@@ -219,7 +206,6 @@ abstract class MY_Controller extends CI_Controller
      */
     protected function setUserData($userData)
     {
-        
         $temp['email'] = $userData[0]['email'];
         $temp['firstName'] = $userData[0]['firstName'];
         $temp['lastName'] = $userData[0]['lastName'];
@@ -227,7 +213,6 @@ abstract class MY_Controller extends CI_Controller
         $temp['id'] = $userData[0]['id'];
         $temp['locations'] = $this->getUserLocations($userData[0]['id']);
         $temp['true'] = true;
-        
         $this->session->set_userdata('user', $temp);
     }
 
@@ -346,45 +331,21 @@ abstract class MY_Controller extends CI_Controller
      */
     protected function mainNav($userType)
     {
-
-        
-	   $temp = array();
-       $temp['link'] = site_url().'/user/profile';
-       $temp['title'] = 'Main';
-       $temp['home'] = true;
-       $temp['items'] = array();
-       
-       if($this->isLoggedin())
-       {
-            //$temp['items'][] = array('title' => 'Profile','link' => site_url().'/user/profile', 'class' => 'view_page');
-            
-            if($userType == 2 || $userType >= 4)
-            {
-               // $temp['items'][] = array('title' => 'Attendance','link' => site_url().'/attendance', 'class' => 'users');
-                 
-            }
-            
-            if($userType == 4)
-            {
- 
-            }
-                
-                
-       }
-       else
-       {
-            //$temp['items'][ sizeof($temp['items']) + 1] = array('title' => 'Login','link' => site_url().'/user/login', 'class' => 'config');
-       }
-        
-        
-       $temp['items'][] = array('title' => 'Mailing list signup','link' => site_url().'/signup/mailinglist', 'class' => 'contact');
-       $temp['items'][] = array('title' => 'Waiting list signup','link' => site_url().'/signup/waitlist', 'class' => 'add_user');
-       
-       if($userType != 2)
-        $temp['items'][] = array('title' => 'Mentor signup','link' => site_url().'/signup/mentor', 'class' => 'page');
-       
-       $this->setNavItem($temp); 
-       
+        // $temp = array();
+        // $temp['link'] = site_url('/user/profile');
+        // $temp['title'] = 'Main';
+        // $temp['home'] = true;
+        // $temp['items'] = array();
+        //
+        //
+        // $temp['items'][] = array('title' => 'Mailing list signup','link' => site_url().'/signup/mailinglist', 'class' => 'contact');
+        // $temp['items'][] = array('title' => 'Waiting list signup','link' => site_url().'/signup/waitlist', 'class' => 'add_user');
+        //
+        // if($userType != 2)
+        // $temp['items'][] = array('title' => 'Mentor signup','link' => site_url().'/signup/mentor', 'class' => 'page');
+        //
+        // $this->setNavItem($temp);
+        //
         if($this->isLoggedin())
         {
           $this->profileNav($userType);
@@ -395,36 +356,25 @@ abstract class MY_Controller extends CI_Controller
 
     }
 
-    private function mentorNav($userType)
-    {
-        if($userType == 1 || $userType == 3)
-        return;
+    private function mentorNav($userType) {
+        if($userType == 1 || $userType == 3) return;
         $temp = array();
         $temp['link'] = site_url().'/user/profile';
         $temp['title'] = 'Mentor';
         $temp['home'] = true;
         $temp['items'] = array();
-       
         $temp['items'][] = array('title' => 'Attendance','link' => site_url().'/attendance', 'class' => 'users');
-
         $temp['items'][] = array('title' => 'Training','link' => site_url().'/training', 'class' => 'page');
-        
         $this->setNavItem($temp);
     }
 
-    private function adminNav($userType)
-    {
-        
-        if($userType < 4)
-            return;
-         
+    private function adminNav($userType) {
+        if($userType < 4) return;
         $temp = array();
-       $temp['link'] = site_url().'/admin/admin';
+        $temp['link'] = site_url('/admin/admin');
         $temp['title'] = 'Admin';
         $temp['home'] = true;
         $temp['items'] = array();
-       
-        //$temp['items'][] = array('title' => 'Admin main','link' => site_url().'/admin/admin', 'class' => 'report');
         $temp['items'][] = array('title' => 'Locations','link' => site_url().'/admin/alocations', 'class' => 'report');
         $temp['items'][] = array('title' => 'Sessions','link' => site_url().'/admin/asessions', 'class' => 'report');
         $temp['items'][] = array('title' => 'Students','link' => site_url().'/admin/astudents', 'class' => 'report');
@@ -432,32 +382,25 @@ abstract class MY_Controller extends CI_Controller
         $temp['items'][] = array('title' => 'Users','link' => site_url().'/admin/ausers', 'class' => 'report');
         $temp['items'][] = array('title' => 'Training','link' => site_url().'/training/maintenance', 'class' => 'report');
         $temp['items'][] = array('title' => 'Mailout','link' => site_url().'/mailout', 'class' => 'report');
-        //$temp['items'][] = array('title' => 'Waitlist','link' => site_url().'/waitlist', 'class' => 'report');
         $temp['items'][] = array('title' => 'Session cost','link' => site_url().'/admin/cost', 'class' => 'report');
         $temp['items'][] = array('title' => 'Attendance','link' => site_url().'/admin/aAttendance', 'class' => 'report');
-       
         $this->setNavItem($temp);
     }
 
-    private function profileNav($userType)
-    {
-
-         
- 	   $temp = array();
-       $temp['link'] = site_url().'/user/profile';
-       $temp['title'] = 'Profile';
-       $temp['home'] = true;
-       $temp['items'] = array();
-       
-        $temp['items'][] = array('title' => 'Your information','link' => site_url().'/user/profile/loadPage?page=user', 'class' => 'report');
-        $temp['items'][] = array('title' => 'Child information','link' => site_url().'/user/profile/loadPage?page=child', 'class' => 'report');
-        $temp['items'][] = array('title' => 'Waiting list','link' => site_url().'/user/profile/loadPage?page=waiting', 'class' => 'report');
-        $temp['items'][] = array('title' => 'Mailing list','link' => site_url().'/user/profile/loadPage?page=mail', 'class' => 'report');
-        $temp['items'][] = array('title' => 'Payment','link' => site_url().'/user/profile/loadPage?page=payment', 'class' => 'report');
-        $temp['items'][] = array('title' => 'Mentor','link' => site_url().'/user/profile/loadPage?page=mentor', 'class' => 'report');
-   
-       
-       $this->setNavItem($temp);        
+    private function profileNav($userType) {
+       $this->setNavItem(array(
+          'link' => site_url('user/profile'),
+          'title' => 'My details',
+          'home' => true,
+          'items' => array(
+              array('title' => 'My information', 'link' => site_url('user/profile/loadPage?page=user'), 'class' => 'report'),
+              array('title' => 'Child information', 'link' => site_url('user/profile/loadPage?page=child'), 'class' => 'report'),
+              array('title' => 'Waiting lists', 'link' => site_url('user/profile/loadPage?page=waiting'), 'class' => 'report'),
+              array('title' => 'Mailing lists', 'link' => site_url('user/profile/loadPage?page=mail'), 'class' => 'report'),
+              array('title' => 'Payment', 'link' => site_url('user/profile/loadPage?page=payment'), 'class' => 'report'),
+              array('title' => 'Mentor', 'link' => site_url('user/profile/loadPage?page=mentor'), 'class' => 'report'),
+          ),
+       ));
     }
 
     protected function do_upload($fileName)
@@ -468,8 +411,6 @@ abstract class MY_Controller extends CI_Controller
         $config['max_size']  = '2048';
         $config['max_filename']  = '30';
         $config['remove_spaces'] = true;
-
-
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload())
@@ -482,28 +423,4 @@ abstract class MY_Controller extends CI_Controller
         }
     }
 
-    /*
-    private function addMainNav()
-    {
-         $user = $this->getSessionUserData();
-         
- 	   $temp = array();
-       $temp['link'] = '';
-       $temp['title'] = 'Main';
-       $temp['home'] = true;
-       $temp['items'] = array();
-       
-       $temp['items'][] = array('title' => 'Home','link' => site_url().'/welcome', 'class' => 'view_page');
-       $temp['items'][] = array('title' => 'Gui','link' => site_url().'/gui/hud', 'class' => 'view_page');
-       if($user['admin'])
-       {
-            $temp['items'][] = array('title' => 'Administration','link' => site_url().'/admin/administration', 'class' => 'report');
-            $temp['items'][] = array('title' => 'Add user','link' => site_url().'/admin/addUser', 'class' => 'users');
-            $temp['items'][] = array('title' => 'Activate user','link' => site_url().'/admin/activate', 'class' => 'block_users'); 
-             
-       }
-            
-       
-       $this->setNavItem($temp);       
-    }*/
 }

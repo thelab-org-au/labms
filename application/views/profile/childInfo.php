@@ -1,11 +1,8 @@
 <div id="childInfoDisplay" >
-    <h2>Child details</h2>
-
-<?php //var_dump($studentData); ?>
+    <h2>Child information</h2>
 
     <?php if($parent) : ?>
     <?php foreach($studentData as $student): ?>
-        <?php //var_dump($student); ?>
         <?php echo form_open('user/profile/studentUpdate/',array('id' => 'parentForm')); ?>
             <div class="h_title" id="student<?php echo $student['id']; ?>"><?php echo $student['name']; ?> <span id="expand<?php echo $student['id']; ?>">[+]</span></div>
             <div class="element data" id="ele<?php echo $student['id']; ?>" style="display: none;">

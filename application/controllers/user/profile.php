@@ -10,7 +10,6 @@ class Profile extends MY_Controller
         $this->load->model('profile_model', 'model');
         $this->mainContent = 'profile/profile';
         $this->title = 'Profile';
-        
         $this->baseSeg = 3;
     }
 
@@ -77,11 +76,6 @@ class Profile extends MY_Controller
 
     }
 
-   /* private function getWaitListData($id)
-    {
-        
-    }*/
-    
     private function getStudentData($id)
     {
         $this->data['studentData'] = $this->model->getStudentData($id);
@@ -127,9 +121,7 @@ class Profile extends MY_Controller
 
     public function loadPage($page = null)
     {
-        if($page == null)
-            $page = $this->input->get('page',true);
-
+        if($page == null) $page = $this->input->get('page',true);
         switch($page)
         {
             case 'child':

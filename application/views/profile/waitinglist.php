@@ -1,6 +1,5 @@
 <div id="waitListInfoDisplay" style="padding-right: 10px;" >
     <h2>Waiting lists</h2>
-    <?php //var_dump($studentData);?>
 
     <?php if(count($studentData) > 0) : ?>
         <table style="text-align: center; ">
@@ -21,11 +20,13 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-    
     <?php else : ?>
-    
         <h3>No waitlist information found</h3>
     <?php endif; ?>
+
+    <p>
+        <?php echo anchor('signup/waitlist', 'Waiting list signup') ?>
+    </p>
 
 </div>
 <script type="text/javascript">
